@@ -1,0 +1,52 @@
+body
+{
+background-image:url(Images/background.jpg);
+background-repeat:repeat;
+background-size:100%;
+background-position:right top;
+}
+td{font-size:25px}
+A {color:white;}
+A:visited {color: white;}
+A:active {color: white;}
+{
+background: #f3f2f3;
+color: #000000;
+font-family: Trebuchet MS, Arial, Times New Roman;
+font-size: 12px;
+}
+#container {
+
+margin: 30px auto;
+width: 900px;
+height: 1000px;
+}
+#header {
+background:rbga(0,0,0,0.5);
+height: 200px;
+width: 900px;
+}
+#menu {
+background:rbga(0,0,0,0.5);
+float: left;
+width: 200px;
+min-height:800px;
+}
+#content {
+background:rgba(0,0,0,0.3);
+margin: 0 auto;
+width: 500px;
+}
+p{
+font-size:150%;
+padding-left: 20px;
+color:#ffffff;
+}
+ul{
+font-size:150%;
+color:#ffffff;
+}
+table{
+font-size:100%;
+color:#ffffff;
+}

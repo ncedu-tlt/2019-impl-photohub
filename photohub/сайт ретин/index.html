@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+<link rel="shortcut icon" href="Images/photohub.ico" >
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<script type="text/javascript" src="validation.js"></script>
+</head>
+<body>
+ 
+<div id="container">
+<div id="header"><p style=font-size:100px; align=center><img src="Images/PhotoHub.png" width=500 heiht=700></p>
+</div>
+<div id="content"><p>
+    <form method="post" action="/login/">
+    <table>
+        <tr>
+            <td><label for="loginField">Логин</label></td>
+            <td><input id="loginField" type="text" name="login"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Пароль</label></td>
+            <td><input id="password" type="text" name="password"></td>
+        </tr>
+         <tr>
+            <td><label for="email">Почта</label></td>
+            <td><input id="email" type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td><label for="name">Имя</label></td>
+            <td><input id="name" type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td><label for="surname">Фамилия</label></td>
+            <td><input id="surname" type="text" name="surname"></td>
+        </tr>
+          <tr>
+            <td><label for="birthday">День рождения</label></td>
+            <td><input id="birthday" type="date" name="birthday"></td>
+        </tr>
+		<tr><td><input type="submit" value="отправить" name="Submit" onClick="return Formdata(this.form)"></td></tr>
+    </table>
+</form></p>
+</div>
+</div>
+ 
+</body>
+</html>
