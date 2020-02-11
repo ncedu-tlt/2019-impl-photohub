@@ -23,3 +23,36 @@ npm_run_build {
 
     outputs.dir 'build'
 }
+
+// pack output of the build into JAR file
+task packageNpmApp(type: Zip) {
+    dependsOn npm_run_build
+    baseName 'npm-app'
+    extension 'jar'
+    destinationDir file("${projectDir}/build_packageNpmApp")
+    from('build') {
+        // optional path under which output will be visible in Java classpath, e.g. static resources path
+        into 'static'
+    }
+}
+
+// declare a dedicated scope for publishing the packaged JAR
+configurations {
+    npmResources
+}
+
+configurations.default.extendsFrom(configurations.npmResources)
+
+// expose the artifact created by the packaging task
+artifacts {
+    npmResources(packageNpmApp.archivePath) {
+        builtBy packageNpmApp
+        type 'jar'
+    }
+}
+
+assemble.dependsOn packageNpmApp
+
+clean {
+    delete packageNpmApp.archivePath
+}

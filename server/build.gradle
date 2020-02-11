@@ -30,7 +30,7 @@ test {
 
 task copyVueToStatic(type: Copy, dependsOn: ':client:build') {
   from project(':client').file('/dist')
-  into "src/main/resources/static"
+  into project(':server').file("/src/main/resources/static")
 }
 
 task copyJarToRoot(type: Copy, dependsOn: ':server:jar') {
@@ -38,4 +38,3 @@ task copyJarToRoot(type: Copy, dependsOn: ':server:jar') {
   into project.rootDir
   rename { 'photohub.jar' }
 }
-build.dependsOn(':server:copyJarToRoot')
