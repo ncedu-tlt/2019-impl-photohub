@@ -28,18 +28,16 @@ test {
 }
 
 // Deploying VUE dist to SpringBoot application
-jar {
+/*jar {
   from project(':client').file('/dist')
   enabled = true
 }
-jar.dependsOn(':client:build')
+jar.dependsOn(':client:build')*/
 
 task copyJarToRoot(type: Copy) {
   from jar.destinationDirectory.file(jar.archiveFileName)
   into project.rootDir
-  rename {
-    'photohub.jar'
-  }
+  rename { 'photohub.jar' }
 }
 copyJarToRoot.dependsOn(':server:jar')
 build.dependsOn(':server:copyJarToRoot')
