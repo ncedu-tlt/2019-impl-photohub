@@ -27,8 +27,17 @@ test {
   useJUnitPlatform()
 }
 
+// Deploying VUE dist to SpringBoot application
 jar {
   from project(':client').file('/dist')
   enabled = true
 }
 jar.dependsOn(':client:build')
+
+// https://devcenter.heroku.com/articles/deploying-gradle-apps-on-heroku
+// Verify that your build file is set up correctly
+task copyToLib(type: Copy) {
+  from project(':server').file('build/libs')
+  into "$parent.buildDir/libs"
+}
+build.dependsOn(copyToLib)
