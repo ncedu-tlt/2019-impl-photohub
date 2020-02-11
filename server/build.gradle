@@ -14,30 +14,28 @@ repositories {
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-  // implementation 'org.springframework.boot:spring-boot-starter-security'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   runtimeOnly 'mysql:mysql-connector-java'
   testImplementation('org.springframework.boot:spring-boot-starter-test') {
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
-  //testImplementation 'org.springframework.security:spring-security-test'
+
+  // implementation 'org.springframework.boot:spring-boot-starter-security'
+  // testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {
   useJUnitPlatform()
 }
 
-// Deploying VUE dist to SpringBoot application
-/*jar {
+task copyVueToStatic(type: Copy, dependsOn: ':client:build') {
   from project(':client').file('/dist')
-  enabled = true
+  into "src/main/resources/static"
 }
-jar.dependsOn(':client:build')*/
 
-task copyJarToRoot(type: Copy) {
+task copyJarToRoot(type: Copy, dependsOn: ':server:jar') {
   from jar.destinationDirectory.file(jar.archiveFileName)
   into project.rootDir
   rename { 'photohub.jar' }
 }
-copyJarToRoot.dependsOn(':server:jar')
 build.dependsOn(':server:copyJarToRoot')
