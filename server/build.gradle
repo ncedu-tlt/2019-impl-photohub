@@ -38,6 +38,8 @@ jar.dependsOn(':client:build')
 // Verify that your build file is set up correctly
 task copyToLib(type: Copy) {
   from project(':server').file('build/libs')
-  into "$parent.buildDir/libs"
+  into rootProject.file('build/libs')
+  println rootProject.file('build/libs').listFiles()
+  println project(':server').file('build/libs').listFiles()
 }
 build.dependsOn(copyToLib)
