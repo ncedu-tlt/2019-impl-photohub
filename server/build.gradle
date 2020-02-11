@@ -32,9 +32,4 @@ task copyVueToStatic(type: Copy, dependsOn: ':client:build') {
   from project(':client').file('/dist')
   into project(':server').file("/src/main/resources/static")
 }
-
-task copyJarToRoot(type: Copy, dependsOn: ':server:jar') {
-  from jar.destinationDirectory.file(jar.archiveFileName)
-  into project.rootDir
-  rename { 'photohub.jar' }
-}
+processResources.dependsOn(copyVueToStatic)
