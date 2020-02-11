@@ -33,13 +33,3 @@ jar {
   enabled = true
 }
 jar.dependsOn(':client:build')
-
-// https://devcenter.heroku.com/articles/deploying-gradle-apps-on-heroku
-// Verify that your build file is set up correctly
-task copyToLib(type: Copy) {
-  from project(':server').file('build/libs')
-  into rootProject.file('build/libs')
-  println rootProject.file('build/libs').listFiles()
-  println project(':server').file('build/libs').listFiles()
-}
-build.dependsOn(copyToLib)
