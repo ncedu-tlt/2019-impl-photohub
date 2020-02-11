@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar server/build/libs/photohub-1.0-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar photohub.jar
