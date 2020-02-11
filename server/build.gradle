@@ -1,9 +1,8 @@
 plugins {
   id "org.springframework.boot" version "2.2.4.RELEASE"
+  id "io.spring.dependency-management" version "1.0.9.RELEASE"
+  id "war"
 }
-
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java'
 
 group = 'com.netcracker.ncedu.tlt.impl'
 version = '0.0.1-SNAPSHOT'
@@ -22,10 +21,14 @@ dependencies {
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
   //testImplementation 'org.springframework.security:spring-security-test'
-
-  runtimeOnly project(':client')
 }
 
 test {
   useJUnitPlatform()
 }
+
+war {
+  webInf { from project(":client").file("/dist") }
+  enabled = true
+}
+war.dependsOn(':client:build')

@@ -1,4 +1,3 @@
 rootProject.name = 'photohub'
 
-include 'server'
-include 'client'
+include 'client', 'server'
