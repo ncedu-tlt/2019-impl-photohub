@@ -26,6 +26,6 @@ assemble.dependsOn npm_run_build
 
 task copyVueToProjectRoot(type: Copy) {
     from project(':client').file('/dist')
-    into rootProject.file('/static')
+    into rootProject.file('/dist')
 }
 build.dependsOn copyVueToProjectRoot

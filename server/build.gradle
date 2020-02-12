@@ -31,7 +31,9 @@ test {
 sourceSets {
   main {
     resources {
-      srcDirs "src/main/resources", rootProject.file('/static')
+      srcDirs "src/main/resources", rootProject.file('/dist')
     }
   }
 }
+
+build.dependsOn(':client:build')
