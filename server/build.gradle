@@ -28,11 +28,9 @@ test {
   useJUnitPlatform()
 }
 
-sourceSets {
-  main {
-    resources {
-      srcDirs "src/main/resources", "${project(':client').projectDir}/dist"
-    }
+processResources {
+  from ("${project(':client').projectDir}/dist") {
+    into 'static'
   }
 }
 
