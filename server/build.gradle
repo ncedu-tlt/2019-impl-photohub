@@ -31,7 +31,7 @@ test {
 sourceSets {
   main {
     resources {
-      srcDirs "src/main/resources", rootProject.file('/dist')
+      srcDirs "src/main/resources", "${project(':client').projectDir}/dist"
     }
   }
 }
