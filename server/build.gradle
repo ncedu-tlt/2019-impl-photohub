@@ -28,8 +28,10 @@ test {
   useJUnitPlatform()
 }
 
-task copyVueToStatic(type: Copy, dependsOn: ':client:build') {
-  from project(':client').file('/dist')
-  into project(':server').file("/src/main/resources/static")
+sourceSets {
+  main {
+    resources {
+      srcDirs "src/main/resources", rootProject.file('/static')
+    }
+  }
 }
-processResources.dependsOn(copyVueToStatic)
