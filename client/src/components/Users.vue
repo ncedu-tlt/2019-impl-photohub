@@ -78,8 +78,9 @@
                     name: this.name,
                     email: this.email
                 }).then(response => {
-                    console.log(response);
-                    this.users.push({name: this.name, email: this.email})
+                    if (response.status === 200) {
+                        this.users.push({name: this.name, email: this.email})
+                    }
                 }).catch(error => {
                     console.error(error)
                 })
