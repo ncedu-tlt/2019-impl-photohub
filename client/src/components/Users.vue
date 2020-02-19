@@ -1,33 +1,34 @@
+import Vuetify from 'vuetify/lib'
 <template>
     <div class="users-container">
         <div class="column">
-            <h3>Users stored in database</h3>
-            <ul>
-                <li v-for="user in users"
-                    :key="user.id">
-                    {{user.name}}
-                </li>
-            </ul>
-        </div>
+
+            <h3>Registered</h3>
         <div class="column">
-            <h3>Form for entering new user</h3>
-            <p>
-                <label for="name">Name</label>
+                            <ul>
+                                <li v-for="user in users"
+                                    :key="user.id">
+                                    {{user.name}}
+                                </li>
+                            </ul>
+                <label for="name">Name<br></label>
                 <input id="name" v-model="name" type="text" name="name">
-            </p>
-            <p>
-                <label for="email">Email</label>
+                <label for="email">Email<br></label>
                 <input id="email" v-model="email" type="email" name="email">
-            </p>
+                <label for="password">Password<br></label>
+                <input id="password" v-model="password" type="password" name="password">
+
             <p>
-                <button v-on:click="addNewUser">Create user</button>
+                <button v-on:click="addNewUser">SignIN</button>
             </p>
+
             <p v-if="errors.length">
                 <b>Please fix next errors:</b>
                 <ul>
                     <li v-for="error in errors" :key="error">{{ error }}</li>
                 </ul>
             </p>
+            </div>
         </div>
     </div>
 </template>
@@ -96,19 +97,21 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
     .users-container {
-        display: flex;
-        width: 50%;
-        margin: 0 auto;
+    height:600px;
+
     }
 
     .column {
-        flex: 50%;
+    width:500px;
     }
 
     h3 {
         margin: 40px 0 0;
     }
+
 
     ul {
         list-style-type: none;
@@ -118,8 +121,50 @@
     li {
         margin: 10px;
     }
+    .column button{
+        color: rgb(192, 192, 192);
+        text-shadow: 0 0 10px rgb(255, 255, 255);
+        cursor: pointer;
+        display: block;
+        position: relative;
+        width: 120px;
+        height: 52px;
+        color: rgb(192, 192, 192);
+        border-radius: 50px;
+        outline: 0;
+        z-index: 2;
+        background: rgb(28, 30, 33);
+        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
+        border: 6px solid rgb(52, 56, 61);
+        font-size: 25px;
+        text-indent: 0px;
+}
 
-    label {
-        margin-right: 10px;
+    .column label {
+        color: rgb(192, 192, 192);
+        height:45px;
+        width:170px;
+        font-size: 15px;
+        float: left;
+    }
+    .column input {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        float:right;
+        width: 280px;
+        height: 45px;
+        border: 0;
+        outline: 0;
+        top: -2px;
+        padding: 0 0 0 20px;
+        font-weight: 700;
+        background: rgb(28, 30, 33);
+        text-shadow:0 0 10px rgb(255, 255, 255);
+        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
+        color: rgb(192, 192, 192);
+    }
+    .column p{
     }
 </style>
