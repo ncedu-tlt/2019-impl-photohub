@@ -1,10 +1,10 @@
 <template>
-    <div>{{name}}</div>
+    <h2>Test route 2</h2>
 </template>
 
 <script>
     export default {
-        name: "test"
+        name: "TestRoute2"
     }
 </script>
 
