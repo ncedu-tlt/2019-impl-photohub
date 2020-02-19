@@ -20,3 +20,4 @@ Response : {status: 'success'} - 200.
 
 {status: 'error', msg: '....'} - в случае ошибки. msg - коды: NOT_FOUND, SYSTEM_ERROR
           
+3)
