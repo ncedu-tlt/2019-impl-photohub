@@ -12,14 +12,6 @@ public class DemoController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(path="/add")
-    public @ResponseBody String addNewUserGet(@RequestParam String name, @RequestParam String email) {
-        User n = new User();
-        n.setName(name);
-        n.setEmail(email);
-        userRepository.save(n);
-        return "Saved";
-    }
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewUserPost(@RequestBody User user) {
