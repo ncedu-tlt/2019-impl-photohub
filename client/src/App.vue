@@ -1,38 +1,45 @@
+
 <template>
   <div id="app">
-    <HelloWorld msg="PhotoHub"/>
-    <router-link class="nav-link" active-class="active" to="/HelloWorld">Autorizated</router-link>
-    <router-link class="nav-link" active-class="active" to="/SignIn">Page 1</router-link>
-    <transition name="fade">
-              <router-view></router-view>
-        </transition>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+//import Authenticate from './components/Authenticate.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    //Authenticate
   }
 }
 </script>
 <style>
-#app {
-.fade-enter-active, .fade-leave-active {
-  transition-property: opacity;
-  transition-duration: .25s;
-}
+    #app {
+        .fade-enter-active, .fade-leave-active {
+            transition-property: opacity;
+            transition-duration: .25s;
+        }
 
-.fade-enter-active {
-  transition-delay: .25s;
-}
+        .fade-enter-active {
+            transition-delay: .25s;
+        }
 
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
 
+        @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+        font-family: 'Press Start 2P', cursive;
+        background-image: url('/assets/background2.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
     }
+
+
 </style>

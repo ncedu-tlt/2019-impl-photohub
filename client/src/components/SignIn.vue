@@ -3,7 +3,7 @@ import Vuetify from 'vuetify/lib'
     <div class="users-container">
         <div class="column">
 
-            <h3>Registered</h3>
+            <h3>SignIn </h3>
         <div class="column">
                             <ul>
                                 <li v-for="user in users"
@@ -11,17 +11,17 @@ import Vuetify from 'vuetify/lib'
                                     {{user.name}}
                                 </li>
                             </ul>
-                <label for="name">Name<br></label>
-                <input id="name" v-model="name" type="text" name="name">
                 <label for="email">Email<br></label>
                 <input id="email" v-model="email" type="email" name="email">
                 <label for="password">Password<br></label>
                 <input id="password" v-model="password" type="password" name="password">
 
             <p>
-                <button v-on:click="addNewUser">SignIN</button>
+                <button v-on:click="Auth">SignIN</button>
             </p>
-
+            <p>
+                <router-link to="/Authorization">Not yet registrated?</router-link>
+            </p>
             <p v-if="errors.length">
                 <b>Please fix next errors:</b>
                 <ul>
@@ -36,32 +36,30 @@ import Vuetify from 'vuetify/lib'
 <script>
     import axios from "axios"
 
-    const Users = {
-        name: "Users",
+    const SignIn = {
+        name: "SignIn",
 
         data: function () {
             return {
                 users: [],
                 errors: [],
-                name: null,
-                email: null
+                email: null,
+                password:null
             }
         },
 
         mounted() {
-            axios.get("/demo/all")
-                .then(response => {
-                    this.users = response.data
-                })
-                .catch(error => {
-                    console.error(error);
-                })
+
         },
 
         methods: {
-            addNewUser: function () {
+            Auth: function () {
                 this.errors = [];
-
+                let email = this.email
+                let password = this.password
+                this.$store.dispatch('login', { email, password })
+               .then(() => this.$router.push('/Profile'))
+               .catch(err => console.log(err))
                 if (!this.name) {
                     this.errors.push("Enter user name")
                 }
@@ -75,30 +73,24 @@ import Vuetify from 'vuetify/lib'
                     return
                 }
 
-
-                axios.post("/demo/add", {
-                    name: this.name,
+                axios.get("/demo/all", {
                     email: this.email,
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
-                        this.users.push({name: this.name, email: this.email,password: this.password})
-                    }
-                }).catch(error => {
-                    console.error(error)
-                })
+                            this.$router.push("/Profile")}
+                        }
+                )
             },
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
                 return emailRegEx.test(email);
             },
-            switchRoute: function () {
-                    this.$router.push("/Profile")
-                }
-            }
+
+        }
     };
 
-    export default Users
+    export default SignIn
 </script>
 
 <style scoped>
