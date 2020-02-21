@@ -1,7 +1,7 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 
 public class LoginData {
-  private  String email;
+    private String email;
 
     private String password;
 

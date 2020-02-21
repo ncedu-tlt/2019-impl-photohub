@@ -8,8 +8,8 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        {path: '/Users', name: 'Users', component: Users},
-        {path: '/Auth', name: 'Auth', component: Auth}
+        {path: '/users', name: 'users', component: Users},
+        {path: '/auth', name: 'auth', component: Auth}
     ]
 });
 

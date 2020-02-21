@@ -31,12 +31,12 @@
         name: "Auth.vue",
 
         data: function () {
-        return {
-            errors: [],
-            email: null,
-            password: null,
-            msg: null,
-        }
+            return {
+                errors: [],
+                email: null,
+                password: null,
+                msg: null,
+            }
           },
 
         methods: {
@@ -64,7 +64,6 @@
                     if (response.status === 200) {
                         this.msg = "success"
                     }
-
                 }).catch(error => {
                     if (error.response.status === 404) {
                         this.msg = "404 NOT FOUND"
@@ -74,7 +73,6 @@
                     console.error(error)
                 })
             },
-
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
                 return emailRegEx.test(email);
@@ -82,7 +80,7 @@
 
         }
 
-    }
+    };
 
     export default Auth
 

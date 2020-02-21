@@ -3,12 +3,11 @@
         <img alt="Vue logo" src="./assets/logo.png">
         <HelloWorld msg="Welcome to demo page for PhotoHub app"/>
         <p>
-            <router-link to="/Users">Registration</router-link>
-            <router-link to="/Auth">Autorisation</router-link>
+            <router-link to="/users">Registration</router-link>
+            <router-link to="/auth">Authorisation</router-link>
         </p>
         <router-view></router-view>
         <button v-on:click="switchRoute">Switch route</button>
-        <Users></Users>
     </div>
 </template>
 
@@ -17,17 +16,16 @@
     export default {
         name: 'App',
         components: {
-            HelloWorld,
-
+            HelloWorld
         },
         methods: {
             switchRoute: function () {
                 const routeName = this.$router.currentRoute.name;
                 if (routeName) {
-                    const path = routeName === "Users" ? "/Auth" : "/Users";
+                    const path = routeName === "users" ? "/auth" : "/users";
                     this.$router.push(path)
                 } else {
-                    this.$router.push("/Users")
+                    this.$router.push("/users")
                 }
             }
         }

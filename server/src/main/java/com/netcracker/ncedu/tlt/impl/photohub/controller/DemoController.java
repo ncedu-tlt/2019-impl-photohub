@@ -36,8 +36,5 @@ public class DemoController {
         if(userRepository.existsByEmailAndPassword(loginData.getEmail(), loginData.getPassword())) {
             response.sendError(404);
         }
-
     }
-
-
 }
