@@ -20,6 +20,12 @@
                 <input id="email" v-model="email" type="email" name="email">
             </p>
             <p>
+                <label for="password">Password</label>
+                <input id="password" v-model="password" type="password" name="password">
+            </p>
+
+
+            <p>
                 <button v-on:click="addNewUser">Create user</button>
             </p>
             <p v-if="errors.length">
@@ -42,13 +48,14 @@
             return {
                 users: [],
                 errors: [],
-                name: null,
-                email: null
+                login: null,
+                email: null,
+                password: null
             }
         },
 
         mounted() {
-            axios.get("/demo/all")
+            axios.get("/API/registration ")
                 .then(response => {
                     this.users = response.data
                 })
@@ -70,16 +77,22 @@
                     this.errors.push("Enter valid email address")
                 }
 
+                if(!this.password) {
+                    this.errors.push("Enter password")
+                }
+
                 if (this.errors.length) {
                     return
                 }
 
-                axios.post("/demo/add", {
-                    name: this.name,
-                    email: this.email
+                axios.post("/API/registration ", {
+                    login: this.login,
+                    email: this.email,
+                    password: this.password
+
                 }).then(response => {
                     if (response.status === 200) {
-                        this.users.push({name: this.name, email: this.email})
+                        this.users.push({login: this.login, email: this.email, password: this.password})
                     }
                 }).catch(error => {
                     console.error(error)

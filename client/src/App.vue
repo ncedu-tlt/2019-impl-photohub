@@ -3,30 +3,31 @@
         <img alt="Vue logo" src="./assets/logo.png">
         <HelloWorld msg="Welcome to demo page for PhotoHub app"/>
         <p>
-            <router-link to="/test1">Go to test 1</router-link>
-            <router-link to="/test2">Go to test 2</router-link>
+            <router-link to="/Users">Registration</router-link>
+            <router-link to="/Auth">Autorisation</router-link>
         </p>
         <router-view></router-view>
         <button v-on:click="switchRoute">Switch route</button>
+        <Users></Users>
     </div>
 </template>
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
-
     export default {
         name: 'App',
         components: {
-            HelloWorld
+            HelloWorld,
+
         },
         methods: {
             switchRoute: function () {
                 const routeName = this.$router.currentRoute.name;
                 if (routeName) {
-                    const path = routeName === "test1" ? "/test2" : "/test1";
+                    const path = routeName === "Users" ? "/Auth" : "/Users";
                     this.$router.push(path)
                 } else {
-                    this.$router.push("/test1")
+                    this.$router.push("/Users")
                 }
             }
         }
@@ -41,5 +42,8 @@
         text-align: center;
         color: #2c3e50;
         margin-top: 60px;
+    }
+    a {
+      margin-right: 10px;
     }
 </style>
