@@ -16,6 +16,6 @@ export default {
 }
 </script>
 <style>
-        background-image: url('/assets/background2.jpg');
+background-image: url('/assets/background2.jpg');
 
 </style>

@@ -95,7 +95,7 @@ import Vuetify from 'vuetify/lib'
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
-
+background-image: url('/assets/background2.jpg');
     .users-container {
     height:600px;
 

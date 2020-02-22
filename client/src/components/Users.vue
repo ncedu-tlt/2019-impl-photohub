@@ -5,12 +5,6 @@ import Vuetify from 'vuetify/lib'
 
             <h3>Registered</h3>
         <div class="column">
-                            <ul>
-                                <li v-for="user in users"
-                                    :key="user.id">
-                                    {{user.name}}
-                                </li>
-                            </ul>
                 <label for="name">Name<br></label>
                 <input id="name" v-model="name" type="text" name="name">
                 <label for="email">Email<br></label>
@@ -82,7 +76,8 @@ import Vuetify from 'vuetify/lib'
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
-                        this.users.push({name: this.name, email: this.email,password: this.password})
+                        this.users.push({name: this.name, email: this.email,password: this.password}),
+                        this.$router.push("/Profile")
                     }
                 }).catch(error => {
                     console.error(error)
@@ -92,9 +87,7 @@ import Vuetify from 'vuetify/lib'
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
                 return emailRegEx.test(email);
             },
-            switchRoute: function () {
-                    this.$router.push("/Profile")
-                }
+
             }
     };
 
@@ -103,6 +96,7 @@ import Vuetify from 'vuetify/lib'
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+background-image: url('/assets/background2.jpg');
 
     .users-container {
     height:600px;
