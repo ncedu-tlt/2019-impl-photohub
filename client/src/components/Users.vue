@@ -12,8 +12,8 @@
         <div class="column">
             <h3>Form for entering new user</h3>
             <p>
-                <label for="name">Name</label>
-                <input id="name" v-model="name" type="text" name="name">
+                <label for="login">Login</label>
+                <input id="login" v-model="login" type="text" name="login">
             </p>
             <p>
                 <label for="email">Email</label>
@@ -55,7 +55,7 @@
         },
 
         mounted() {
-            axios.get("/API/registration ")
+            axios.get("/api/registration ")
                 .then(response => {
                     this.users = response.data
                 })
@@ -68,8 +68,8 @@
             addNewUser: function () {
                 this.errors = [];
 
-                if (!this.name) {
-                    this.errors.push("Enter user name")
+                if (!this.login) {
+                    this.errors.push("Enter user login")
                 }
                 if (!this.email) {
                     this.errors.push("Enter user email")
@@ -85,7 +85,7 @@
                     return
                 }
 
-                axios.post("/API/registration ", {
+                axios.post("/api/registration ", {
                     login: this.login,
                     email: this.email,
                     password: this.password
