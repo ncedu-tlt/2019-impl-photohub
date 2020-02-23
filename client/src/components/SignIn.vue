@@ -93,7 +93,7 @@ import Vuetify from 'vuetify/lib'
     export default SignIn
 </script>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 background-image: url('/assets/background2.jpg');
     .users-container {
