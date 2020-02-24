@@ -1,16 +1,7 @@
-import Vuetify from 'vuetify/lib'
 <template>
     <div class="users-container">
         <div class="column">
-
-            <h3>SignIn </h3>
-        <div class="column">
-                            <ul>
-                                <li v-for="user in users"
-                                    :key="user.id">
-                                    {{user.name}}
-                                </li>
-                            </ul>
+                <h1>SignIn </h1>
                 <label for="email">Email<br></label>
                 <input id="email" v-model="email" type="email" name="email">
                 <label for="password">Password<br></label>
@@ -23,14 +14,13 @@ import Vuetify from 'vuetify/lib'
                 <router-link to="/Authorization">Not yet registrated?</router-link>
             </p>
             <p v-if="errors.length">
-                <b>Please fix next errors:</b>
+                <b>Please fill out the form correctly :</b>
                 <ul>
                     <li v-for="error in errors" :key="error">{{ error }}</li>
                 </ul>
             </p>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -43,8 +33,8 @@ import Vuetify from 'vuetify/lib'
             return {
                 users: [],
                 errors: [],
-                email: null,
-                password:null
+                email:"",
+                password:""
             }
         },
 
@@ -73,7 +63,7 @@ import Vuetify from 'vuetify/lib'
                     return
                 }
 
-                axios.get("/demo/all", {
+                axios.get("/api/auth", {
                     email: this.email,
                     password: this.password
                 }).then(response => {
@@ -94,8 +84,6 @@ import Vuetify from 'vuetify/lib'
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
-background-image: url('/assets/background2.jpg');
     .users-container {
     height:600px;
 

@@ -16,6 +16,5 @@ export default {
 }
 </script>
 <style>
-background-image: url('/assets/background2.jpg');
-
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 </style>

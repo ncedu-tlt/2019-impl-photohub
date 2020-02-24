@@ -1,10 +1,7 @@
-import Vuetify from 'vuetify/lib'
 <template>
     <div class="users-container">
         <div class="column">
-
-            <h3>Registered</h3>
-        <div class="column">
+                <h1>Registered</h1>
                 <label for="name">Name<br></label>
                 <input id="name" v-model="name" type="text" name="name">
                 <label for="email">Email<br></label>
@@ -17,14 +14,13 @@ import Vuetify from 'vuetify/lib'
             </p>
 
             <p v-if="errors.length">
-                <b>Please fix next errors:</b>
+                <b>Please fill out the form correctly :</b>
                 <ul>
                     <li v-for="error in errors" :key="error">{{ error }}</li>
                 </ul>
             </p>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -70,7 +66,7 @@ import Vuetify from 'vuetify/lib'
                 }
 
 
-                axios.post("/demo/add", {
+                axios.post("/api/registration", {
                     name: this.name,
                     email: this.email,
                     password: this.password
@@ -94,10 +90,7 @@ import Vuetify from 'vuetify/lib'
     export default Users
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
-background-image: url('/assets/background2.jpg');
-
+<style>
     .users-container {
     height:600px;
 

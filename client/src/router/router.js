@@ -12,6 +12,6 @@ const router = new VueRouter({
         {path: '/Profile', name: 'profile', component: Profile},
         {path: '/', name: 'Authenticate', component: Authenticate}
     ]
-});
+})
 
 export default router
