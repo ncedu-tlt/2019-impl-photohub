@@ -7,11 +7,16 @@ import Profile from "../components/Profile"
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+
     routes: [
+        {path: '/', name: 'profile', component: Profile},
         {path: '/Authorization', name: 'Authorization', component: Authorization},
-        {path: '/Profile', name: 'profile', component: Profile},
-        {path: '/', name: 'Authenticate', component: Authenticate}
+        {path: '/Authenticate', name: 'Authenticate', component: Authenticate}
     ]
+       router.beforeEach((to, from, next) => {
+         if (!isAuthenticated) next('/Authorization')
+         else next()
+       })
 })
 
 export default router

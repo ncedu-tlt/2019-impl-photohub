@@ -1,6 +1,5 @@
 <template>
-  <div class="Authenticate">
-    <h1>{{ msg }}</h1>
+     <div class="Authenticate">
     <SignIn/>
   </div>
 </template>

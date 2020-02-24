@@ -26,28 +26,18 @@
 <script>
     import axios from "axios"
 
-    const Users = {
-        name: "Users",
+    const Register = {
+        name: "Register",
 
         data: function () {
             return {
                 users: [],
                 errors: [],
                 name: null,
-                email: null
+                email: null,
+                password:null
             }
         },
-
-        mounted() {
-            axios.get("/demo/all")
-                .then(response => {
-                    this.users = response.data
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-        },
-
         methods: {
             addNewUser: function () {
                 this.errors = [];
@@ -87,7 +77,7 @@
             }
     };
 
-    export default Users
+    export default Register
 </script>
 
 <style>

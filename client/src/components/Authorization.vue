@@ -1,18 +1,14 @@
 <template>
-  <div class="Authorization">
-    <h1>{{ msg }}</h1>
-    <Users/>
+    <div class=Authorization>
+    <Register/>
   </div>
 </template>
 
 <script>
-import Users from "./Users";
+import Register from "./Register";
 export default {
   name: 'Authorization',
-    components: {Users},
-    props: {
-    msg: String
-  }
+    components: {Register},
 }
 </script>
 <style>

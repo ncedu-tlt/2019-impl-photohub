@@ -8,7 +8,7 @@
                 <input id="password" v-model="password" type="password" name="password">
 
             <p>
-                <button v-on:click="Auth">SignIN</button>
+                <button v-on:click="auth">SignIN</button>
             </p>
             <p>
                 <router-link to="/Authorization">Not yet registrated?</router-link>
@@ -37,19 +37,8 @@
                 password:""
             }
         },
-
-        mounted() {
-
-        },
-
         methods: {
-            Auth: function () {
-                this.errors = [];
-                let email = this.email
-                let password = this.password
-                this.$store.dispatch('login', { email, password })
-               .then(() => this.$router.push('/Profile'))
-               .catch(err => console.log(err))
+            auth: function () {
                 if (!this.name) {
                     this.errors.push("Enter user name")
                 }
@@ -63,7 +52,7 @@
                     return
                 }
 
-                axios.get("/api/auth", {
+                axios.POST("/api/auth", {
                     email: this.email,
                     password: this.password
                 }).then(response => {
