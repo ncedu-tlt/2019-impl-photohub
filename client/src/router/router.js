@@ -14,7 +14,7 @@ const router = new VueRouter({
         {path: '/Authenticate', name: 'Authenticate', component: Authenticate}
     ]
        router.beforeEach((to, from, next) => {
-         if (!isAuthenticated) next('/Authorization')
+         if (!isAuthenticated) next('/Authenticate')
          else next()
        })
 })
