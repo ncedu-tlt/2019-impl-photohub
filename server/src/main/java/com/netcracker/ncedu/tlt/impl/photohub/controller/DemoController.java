@@ -1,5 +1,4 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
-
 import com.netcracker.ncedu.tlt.impl.photohub.model.User;
 import com.netcracker.ncedu.tlt.impl.photohub.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
