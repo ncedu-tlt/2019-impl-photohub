@@ -13,6 +13,8 @@ const router = new VueRouter({
         {path: '/', name: 'profile', component: Profile,meta: { requiresAuth: true }},
         {path: '/authorization', name: 'Authorization', component: Authorization},
         {path: '/authenticate', name: 'Authenticate', component: Authenticate}
+
+
     ]
 })
     router.beforeEach((to, from, next) => {

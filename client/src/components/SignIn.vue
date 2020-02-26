@@ -44,7 +44,6 @@
                 ls.set("photohubUser",this.email)
                 this.$router.push("/")
             },
-
             auth: function () {
                 if (!this.email) {
                     this.errors.push("Enter user email")
@@ -64,13 +63,11 @@
                             ls.set("photohubUser",this.email);
                             this.$router.push("/");
                             }
-                      else if(response.status === 404){
-                        alert("eror");
-                      }
-                    }).catch(error => {
-                        console.error(error)
+                    else if (response.status === 404) {
+                        alert("not found");
+                    }
                     })
-            },
+             },
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
                 return emailRegEx.test(email);
