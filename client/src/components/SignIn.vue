@@ -64,9 +64,16 @@
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
-                            ls.set("photohubUser",this.email)
-                            this.$router.push("/")}
+                            ls.set("photohubUser",this.email);
+                            this.$router.push("/");
+                            }
+                        },
+                        else{
+                        alert("что-то не так");
                         }
+                    }).catch(error => {
+                        console.error(error)
+                    })
                 )
             },
             validateEmail: function (email) {
