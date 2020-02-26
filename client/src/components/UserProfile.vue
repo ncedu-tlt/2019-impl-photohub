@@ -6,6 +6,8 @@
       </div>
       <div id="content">
         <h2>Лента(фоточки будут здесь)</h2>
+        <img v-show="imageSrc" class="Image-input__image" :src="imageSrc">
+        <input @change="previewThumbnail" class="Image-input__input" name="thumbnail" type="file">
       </div>
       <div id="footer">чтобы было, вдруг че</div>
      </div>
