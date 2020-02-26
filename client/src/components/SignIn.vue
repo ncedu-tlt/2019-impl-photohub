@@ -1,7 +1,8 @@
 <template>
-    <div class="users-container">
-        <div class="column">
-                <h1>SignIn </h1>
+        <div class="column_auth">
+                <h1 style="
+                       margin-bottom: 10px;font-size: 50px;
+                   ">SignIn </h1>
                 <label for="email">Email<br></label>
                 <input id="email" v-model="email" type="email" name="email">
                 <label for="password">Password<br></label>
@@ -11,7 +12,7 @@
                 <button v-on:click="signIN">SignIN</button>
             </p>
             <p>
-                <router-link to="/Authorization">Not yet registrated?</router-link>
+                <router-link to="/Authorization">Not yet registrated ?</router-link>
             </p>
             <p v-if="errors.length">
                 <b>Please fill out the form correctly :</b>
@@ -20,7 +21,7 @@
                 </ul>
             </p>
             </div>
-        </div>
+
 </template>
 
 <script>
@@ -80,17 +81,15 @@
 </script>
 
 <style>
-    .users-container {
-    height:600px;
+    .column_auth {
+             width: 600px;
+             margin-left: 200px;
+             margin-top: 100px;
 
-    }
+        }
 
-    .column {
-    width:500px;
-    }
-
-    h3 {
-        margin: 40px 0 0;
+    h1 {
+            text-align:center;
     }
 
 
@@ -102,14 +101,14 @@
     li {
         margin: 10px;
     }
-    .column button{
+    .column_auth button{
         color: rgb(192, 192, 192);
         text-shadow: 0 0 10px rgb(255, 255, 255);
         cursor: pointer;
         display: block;
         position: relative;
-        width: 120px;
-        height: 52px;
+        width: 200px;
+        height: 70px;
         color: rgb(192, 192, 192);
         border-radius: 50px;
         outline: 0;
@@ -117,35 +116,51 @@
         background: rgb(28, 30, 33);
         box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
         border: 6px solid rgb(52, 56, 61);
-        font-size: 25px;
+        font-size: 35px;
         text-indent: 0px;
+        margin-bottom:100px;
 }
 
-    .column label {
+    .column_auth label {
         color: rgb(192, 192, 192);
         height:45px;
         width:170px;
-        font-size: 15px;
+        font-size: 30px;
         float: left;
     }
-    .column input {
+    .column_auth input {
         border-top-right-radius: 8px;
         border-top-left-radius: 8px;
         border-bottom-right-radius: 8px;
         border-bottom-left-radius: 8px;
         float:right;
+        position: relative;
+        display: block;
         width: 280px;
         height: 45px;
-        border: 0;
         outline: 0;
         top: -2px;
         padding: 0 0 0 20px;
         font-weight: 700;
+        font-weight: 700;
+        font-size:25px;
         background: rgb(28, 30, 33);
         text-shadow:0 0 10px rgb(255, 255, 255);
         box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
         color: rgb(192, 192, 192);
     }
-    .column p{
+    .column_auth p{
+        color: rgb(192, 192, 192);
+        padding: 1 20px;
+        font-weight: 700;
+        font-size: 15px;
+        margin: 5px 0 0 0;
+    }
+    .column_auth a{
+        color: rgb(245, 245, 245);
+        text-decoration: none;
+    }
+    .column_auth a:hover{
+        border-bottom: 1px solid;
     }
 </style>

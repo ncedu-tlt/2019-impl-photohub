@@ -1,32 +1,32 @@
-
 <template>
   <div id="app">
+     <div class="logo">
+     <img alt="Vue logo" src="./assets/PhotoHub.png">
+     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App',
-  components: {
-    //Authenticate
-  }
 }
 </script>
 <style>
 body{
         background-image: url('/assets/background2.jpg');
+        background-color:rgb(0, 0, 0);
         background-size: 100% 100%;
         background-repeat: no-repeat;
-        padding: 80px;
+        margin: auto;
         position: absolute;
-        width: 320px;
-        left: 50%;
-        margin-left: -400px;
-        top: 50%;
-        margin-top: -360px;
-
+        top: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+}
+.logo{
+margin: auto;
+text-align:center
 }
     #app {
         @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');

@@ -1,12 +1,15 @@
 <template>
   <div class="Profile">
-    <h1>This Profile</h1>
+    <UserProfile/>
   </div>
 </template>
 
 <script>
-
+import UserProfile from "./UserProfile";
+export default {
+  name: 'Profile',
+    components: {UserProfile},
+}
 </script>
 <style>
-
 </style>
