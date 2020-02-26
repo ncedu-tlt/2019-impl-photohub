@@ -1,22 +1,12 @@
 <template>
-  <div class="Authenticate">
-    <h1>{{ msg }}</h1>
-    <SignIn/>
+  <div class="Profile">
+    <h1>This Profile</h1>
   </div>
 </template>
 
 <script>
-import SignIn from "./SignIn";
-export default {
-  name: 'Authenticate',
-    components: {SignIn},
-    props: {
-    msg: String
-  }
-}
+
 </script>
 <style>
-body{
-        background-image: url('/assets/background2.jpg');
-}
+
 </style>

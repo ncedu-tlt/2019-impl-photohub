@@ -8,7 +8,7 @@
                 <input id="password" v-model="password" type="password" name="password">
 
             <p>
-                <button v-on:click="auth">SignIN</button>
+                <button v-on:click="signIN">SignIN</button>
             </p>
             <p>
                 <router-link to="/Authorization">Not yet registrated?</router-link>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    import ls from "local-storage"
     import axios from "axios"
 
     const SignIn = {
@@ -38,6 +39,11 @@
             }
         },
         methods: {
+            signIN: function(){
+                ls.set("photohubUser",this.email)
+                this.$router.push("/")
+            },
+
             auth: function () {
                 if (!this.name) {
                     this.errors.push("Enter user name")
@@ -52,12 +58,13 @@
                     return
                 }
 
-                axios.POST("/api/auth", {
+                axios.post("/api/auth", {
                     email: this.email,
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
-                            this.$router.push("/Profile")}
+                            ls.set("photohubUser",this.email)
+                            this.$router.push("/")}
                         }
                 )
             },

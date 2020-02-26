@@ -26,6 +26,7 @@ body{
         margin-left: -400px;
         top: 50%;
         margin-top: -360px;
+
 }
     #app {
         @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
