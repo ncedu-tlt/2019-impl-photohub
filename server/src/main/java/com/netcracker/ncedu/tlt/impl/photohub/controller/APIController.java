@@ -22,7 +22,7 @@ public class APIController {
 
     @PostMapping(path = "/auth")
     public void login(@RequestBody LoginData loginData, HttpServletResponse response) throws IOException {
-        if(userRepository.existsByEmailAndPassword(loginData.getEmail(), loginData.getPassword())) {
+        if(!userRepository.existsByEmailAndPassword(loginData.getEmail(), loginData.getPassword())) {
             response.sendError(404);
         }
 
