@@ -13,9 +13,6 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping(path="/api")
-
-
-
 public class APIController {
     @Autowired
     private UserRepository userRepository;
@@ -27,7 +24,14 @@ public class APIController {
         }
 
     }
+    @PostMapping(path = "/registration")
+    public User addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
+        if(!userRepository.existsByEmailAndPassword(User.getEmail(), User.getPassword())) {
+            response.sendError(409);
+        }
 
+        return userRepository.save(user);
+    }
 
 
 
