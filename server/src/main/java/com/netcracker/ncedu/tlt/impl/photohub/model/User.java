@@ -13,9 +13,9 @@ public class User {
 
     private String name;
 
-    private static String email;
+    private String email;
 
-    private static String password;
+    private String password;
 
     public Integer getId() {
         return id;
@@ -33,7 +33,7 @@ public class User {
         this.name = name;
     }
 
-    public static String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -41,15 +41,11 @@ public class User {
         this.email = email;
     }
 
-    public String password() {
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static String getPassword() {
-        return password;
     }
 }
