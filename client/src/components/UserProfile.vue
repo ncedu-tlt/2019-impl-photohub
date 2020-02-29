@@ -6,18 +6,70 @@
       </div>
       <div id="content">
         <h2>Лента(фоточки будут здесь)</h2>
-        <img v-show="imageSrc" class="Image-input__image" :src="imageSrc">
-        <input @change="previewThumbnail" class="Image-input__input" name="thumbnail" type="file">
+            <div class="container">
+                <div class="large-12 medium-12 small-12 cell">
+                  <label>File Preview
+                    <input type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/>
+                  </label>
+                  <img v-bind:src="imagePreview" v-show="showPreview"/>
+                  <button v-on:click="submitFile()">Submit</button>
+                </div>
+              </div>
       </div>
       <div id="footer">чтобы было, вдруг че</div>
      </div>
 </template>
 
 <script>
-
+import axios from "axios"
+export default {
+    data(){
+      return {
+        file: '',
+        showPreview: false,
+        imagePreview: ''
+      }
+    },
+    methods: {
+      submitFile(){
+            let formData = new FormData();
+            formData.append('file', this.file);
+            axios.post( '/api/...',
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(){
+          console.log('SUCCESS!!');
+        })
+        .catch(function(){
+          console.log('FAILURE!!');
+        });
+      },
+      handleFileUpload(){
+        this.file = this.$refs.file.files[0];
+        let reader  = new FileReader();
+        reader.addEventListener("load", function () {
+          this.showPreview = true;
+          this.imagePreview = reader.result;
+        }.bind(this), false);
+        if( this.file ){
+          if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+            reader.readAsDataURL( this.file );
+          }
+        }
+      }
+    }
+  }
 </script>
 
 <style>
+div.container img{
+    max-width: 200px;
+    max-height: 200px;
+  }
 wrapper {
     width: 600;
     margin-left: 200px;
