@@ -23,7 +23,7 @@ public class APIController {
     }
     @PostMapping(path = "/registration")
     public User addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
-        if(userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
+        if(!userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
             response.sendError(409);
         }
         return userRepository.save(user);
