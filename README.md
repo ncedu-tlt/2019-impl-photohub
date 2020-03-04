@@ -20,4 +20,20 @@ Response : {status: 'success'} - 200.
 
 {status: 'error', msg: '....'} - в случае ошибки. msg - коды: NOT_FOUND, SYSTEM_ERROR
           
-3)
+    3) POST /api/imageUpload или /api/image/upload
+
+Request: {email:"...", base64:"..."}
+
+Response : {status: 'success'} - 200.
+
+{status:'error'} - 404 (любую ошибку)
+
+    4) GET /api/imageGet или /api/image/get?id=xxxxxxxx
+
+        /api/imageGet или /api/image/get?email="@.com"
+        
+  Response: 200 + base64 (path поле) - одна картинка
+  
+  200 + [base64,base64,base64,...] - для всех картинок
+  
+  404 - в случае ошибки
