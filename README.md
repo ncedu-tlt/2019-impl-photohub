@@ -27,8 +27,9 @@ Request: {email:"...", base64:"..."}
 Response : {status: 'success'} - 200.
 
 {status:'error'} - 404 (любую ошибку)
+{status:'error'} - 409 - такая картинка уже загружена.
 
-    4) GET /api/imageGet или /api/image/get?id=xxxxxxxx
+    4) GET /api/imageGet или /api/image/get?id=хх
 
         /api/imageGet или /api/image/get?email="@.com"
         
@@ -37,3 +38,11 @@ Response : {status: 'success'} - 200.
   200 + [base64,base64,base64,...] - для всех картинок
   
   404 - в случае ошибки
+  
+    5) POST /api/image/archive/add?id= (imageArchiveAdd)
+    
+    /api/image/archive/del?id= (imageArchiveDel)
+
+Request : id= - ид картинки {id: 'imageId'}
+
+Response: 200 - OK , 404 - NOK
