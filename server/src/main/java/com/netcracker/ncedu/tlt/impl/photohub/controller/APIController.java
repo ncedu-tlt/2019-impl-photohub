@@ -22,13 +22,10 @@ public class APIController {
 
     }
     @PostMapping(path = "/registration")
-    public User addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
+    public void addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
         if(userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
             response.sendError(409, "Такой пользователь уже есть");
-
         }
-       else  {return userRepository.save(user);}
-
-return null;
+        userRepository.save(user);
     }
 }
