@@ -47,7 +47,6 @@
             auth: function () {
                 if (!this.email) {
                     this.errors.push("Enter user email")
-                    this.errors.push("sdsadasd");
                 } else if (!this.validateEmail(this.email)) {
                     this.errors.push("Enter valid email address")
                 }
