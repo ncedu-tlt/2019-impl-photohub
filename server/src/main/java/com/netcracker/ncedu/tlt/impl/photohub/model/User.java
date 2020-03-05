@@ -41,7 +41,7 @@ public class User {
         this.email = email;
     }
 
-    public String password() {
+    public String getPassword() {
         return password;
     }
 
