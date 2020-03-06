@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
         <div class="column_auth">
                 <h1 style="
                        margin-bottom: 10px;font-size: 50px;
@@ -14,15 +14,15 @@
             <p>
                 <router-link to="/Authorization">Not yet registrated ?</router-link>
             </p>
-            <p v-if="errors.length">
-                <b>Please fill out the form correctly :</b>
-                <ul>
-                    <li v-for="error in errors" :key="error">{{ error }}</li>
-                </ul>
-            </p>
+            <div v-if="errors.length">
+                 <b>Please fill out the form correctly :</b>
+            <ul>
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+            </ul>
             </div>
-
+        </div>
 </template>
+
 
 <script>
     import ls from "local-storage"
@@ -40,10 +40,6 @@
             }
         },
         methods: {
-            signIN: function(){
-                ls.set("photohubUser",this.email)
-                this.$router.push("/")
-            },
             auth: function () {
                 if (!this.email) {
                     this.errors.push("Enter user email")
@@ -63,8 +59,9 @@
                             ls.set("photohubUser",this.email);
                             this.$router.push("/");
                             }
-                    }).catch(error => {
+                    else if(response.status===404){
                         this.errors.push("User not found")
+                    }
                     })
             },
             validateEmail: function (email) {
@@ -149,7 +146,7 @@
     }
     .column_auth p{
         color: rgb(192, 192, 192);
-        padding: 1 20px;
+        padding: 1px 20px;
         font-weight: 700;
         font-size: 15px;
         margin: 5px 0 0 0;

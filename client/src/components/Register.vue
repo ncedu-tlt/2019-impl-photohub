@@ -14,13 +14,13 @@
                 <button v-on:click="addNewUser">SignIN</button>
             </p>
 
-            <p v-if="errors.length">
-                <b>Please fill out the form correctly :</b>
+            <div v-if="errors.length">
+                <b>Please fill out the form correctly :</b><br>
                 <ul>
-                    <li v-for="error in errors" :key="error">{{ error }}</li>
+                    <li v-for="error in errors" :key="error">{{ error }}</li><br>
                 </ul>
-            </p>
             </div>
+        </div>
 </template>
 
 <script>
@@ -68,8 +68,9 @@
                     else if(response.status===409){
                         this.errors.push("User already register")
                     }
-                }).catch(error => {
-                    this.errors.push("Error")
+                    else if(response.status===404){
+                        this.errors.push("Try again")
+                    }
                 })
             },
             validateEmail: function (email) {
