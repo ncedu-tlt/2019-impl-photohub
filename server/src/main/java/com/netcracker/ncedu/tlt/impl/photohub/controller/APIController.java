@@ -19,13 +19,12 @@ public class APIController {
         if(!userRepository.existsByEmailAndPassword(loginData.getEmail(), loginData.getPassword())) {
             response.sendError(404);
         }
-
     }
     @PostMapping(path = "/registration")
     public void addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
         if(userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
             response.sendError(409, "Такой пользователь уже есть");
         }
-        userRepository.save(user);
+        else userRepository.save(user);
     }
 }
