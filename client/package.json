@@ -12,6 +12,9 @@
     "core-js": "^3.6.4",
     "local-storage": "^2.0.0",
     "vue": "^2.6.11",
+    "vue-error-page": "^1.1.7",
+    "vue-picture-input": "^2.1.6",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.1.5"
   },
   "devDependencies": {

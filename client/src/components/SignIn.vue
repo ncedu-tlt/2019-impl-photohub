@@ -9,7 +9,7 @@
                 <input id="password" v-model="password" type="password" name="password">
 
             <p>
-                <button v-on:click="signIN">SignIN</button>
+                <button v-on:click="auth">SignIN</button>
             </p>
             <p>
                 <router-link to="/Authorization">Not yet registrated ?</router-link>
@@ -44,11 +44,7 @@
                 ls.set("photohubUser",this.email)
                 this.$router.push("/")
             },
-
             auth: function () {
-                if (!this.name) {
-                    this.errors.push("Enter user name")
-                }
                 if (!this.email) {
                     this.errors.push("Enter user email")
                 } else if (!this.validateEmail(this.email)) {
@@ -64,10 +60,12 @@
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
-                            ls.set("photohubUser",this.email)
-                            this.$router.push("/")}
-                        }
-                )
+                            ls.set("photohubUser",this.email);
+                            this.$router.push("/");
+                            }
+                    }).catch(error => {
+                        this.errors.push("User not found")
+                    })
             },
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");

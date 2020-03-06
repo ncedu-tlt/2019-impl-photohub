@@ -65,8 +65,11 @@
                         this.users.push({name: this.name, email: this.email,password: this.password}),
                         this.$router.push("/authenticate")
                     }
+                    else if(response.status===409){
+                        this.errors.push("User already register")
+                    }
                 }).catch(error => {
-                    console.error(error)
+                    this.errors.push("Error")
                 })
             },
             validateEmail: function (email) {
