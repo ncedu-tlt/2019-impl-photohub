@@ -62,7 +62,9 @@
                     else if(response.status===404){
                         this.errors.push("User not found")
                     }
-                    })
+                    }).catch(error=>{
+                        this.errors.push("User not found " + error)
+                })
             },
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
