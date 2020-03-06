@@ -1,4 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
         <div class="column_auth">
                 <h1 style="
                        margin-bottom: 10px;font-size: 50px;
