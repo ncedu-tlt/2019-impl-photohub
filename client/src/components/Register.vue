@@ -64,8 +64,8 @@
                         this.users.push({name: this.name, email: this.email,password: this.password}),
                         this.$router.push("/authenticate")
                     }
-                }).catch(response=>{
-                    this.errors.push(response.message)
+                }).catch(error=>{
+                    this.errors.push(error.response.data.message)
                 })
 
             },
