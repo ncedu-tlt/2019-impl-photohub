@@ -15,9 +15,8 @@
             </p>
 
             <div v-if="errors.length">
-                <b>Please fill out the form correctly :</b><br>
                 <ul>
-                    <li v-for="error in errors" :key="error">{{ error }}</li><br>
+                    <li v-for="error in errors" :key="error">{{ errors }}</li><br>
                 </ul>
             </div>
         </div>
@@ -65,13 +64,10 @@
                         this.users.push({name: this.name, email: this.email,password: this.password}),
                         this.$router.push("/authenticate")
                     }
-                    else if(response.status===409){
-                        this.errors.push("User already register")
-                    }
-                    else if(response.status===404){
-                        this.errors.push("Try again")
-                    }
+                }).catch(error=>{
+                    this.errors.push(error.response.data.message)
                 })
+
             },
             validateEmail: function (email) {
                 const emailRegEx = new RegExp("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
