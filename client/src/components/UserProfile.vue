@@ -1,6 +1,7 @@
+
 <template>
      <div class="wrapper">
-      <div id="header"><h1>User: <!--{{localStorage.getItem('photohubUser')}}--></h1></div>
+      <div id="header"><h1>User: {{user.email}}</h1></div>
       <div id="sidebar">
         <p>avatar</p>
       </div>
@@ -8,17 +9,6 @@
             <h2>Лента(фоточки будут здесь)</h2>
                 <div class="container">
                     <div class="post">
-                        <div class="image-container"
-                             :style="{ backgroundImage: 'url(' + post.postImage + ')' }"
-                             @dblclick="like">
-                        </div>
-                        <div class="heart">
-                            <i class="far fa-heart fa-lg"
-                               :class="{'fas': this.post.hasBeenLiked}"
-                               @click="like">
-                            </i>
-                        </div>
-                        <p class="likes">{{post.likes}} likes</p>
                     </div>
                     <button v-on:click="uploadPhoto">Download</button>
                 </div>
@@ -32,14 +22,18 @@
 </template>
 
 <script>
-    import ls from "local-storage"
+        import ls from "local-storage"
         const UserProfile = {
         name: "UserProfile",
-        props:{
-            post:Object
-        },
+            data: function () {
+                return {
+                    user: {
+                        email: ls.get('photohubUser')
+                    },
+                }
+            },
         methods: {
-            like() {
+            like:function() {
                 this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++;
                 this.post.hasBeenLiked = !this.post.hasBeenLiked;
             },
@@ -65,7 +59,9 @@
     }
     .likes {
         margin: 5px 0;
+/*
         margin-bottom: 5px !important;
+*/
         font-size: 0.85rem;
         font-weight: bold;
     }
