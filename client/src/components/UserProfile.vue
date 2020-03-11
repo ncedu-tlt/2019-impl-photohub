@@ -1,12 +1,25 @@
 <template>
      <div class="wrapper">
-      <div id="header"><h1>User login</h1></div>
+      <div id="header"><h1>User: <!--{{localStorage.getItem('photohubUser')}}--></h1></div>
       <div id="sidebar">
         <p>avatar</p>
       </div>
           <div id="content">
             <h2>Лента(фоточки будут здесь)</h2>
                 <div class="container">
+                    <div class="post">
+                        <div class="image-container"
+                             :style="{ backgroundImage: 'url(' + post.postImage + ')' }"
+                             @dblclick="like">
+                        </div>
+                        <div class="heart">
+                            <i class="far fa-heart fa-lg"
+                               :class="{'fas': this.post.hasBeenLiked}"
+                               @click="like">
+                            </i>
+                        </div>
+                        <p class="likes">{{post.likes}} likes</p>
+                    </div>
                     <button v-on:click="uploadPhoto">Download</button>
                 </div>
           </div>
@@ -22,8 +35,14 @@
     import ls from "local-storage"
         const UserProfile = {
         name: "UserProfile",
-
+        props:{
+            post:Object
+        },
         methods: {
+            like() {
+                this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++;
+                this.post.hasBeenLiked = !this.post.hasBeenLiked;
+            },
             exitMethods:function(){
                 ls.remove("photohubUser");
                 this.$router.push("/authenticate");
@@ -38,15 +57,30 @@
 </script>
 
 <style>
-div.container img{
-    max-width: 200px;
-    max-height: 200px;
-  }
-wrapper {
-    width: 600px;
-    margin-left: 200px;
-    margin-top: 100px;
-   }
+    .image-container {
+        height: 330px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    .likes {
+        margin: 5px 0;
+        margin-bottom: 5px !important;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+    div.post{
+
+    }
+    div.container img{
+        max-width: 200px;
+        max-height: 200px;
+      }
+    wrapper {
+        width: 600px;
+        margin-left: 200px;
+        margin-top: 100px;
+       }
    h1 {
     font-size: 36px;
     margin: 0;
