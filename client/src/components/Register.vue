@@ -55,7 +55,7 @@
                 }
 
 
-                axios.post("/api/registration", {
+                axios.post("/api/user/registration", {
                     name: this.name,
                     email: this.email,
                     password: this.password

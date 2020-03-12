@@ -10,7 +10,9 @@
                 <div class="container">
                     <div class="post">
                     </div>
-                    <button v-on:click="uploadPhoto">Download</button>
+                    <label>File Preview
+                        <input type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/>
+                    </label>
                 </div>
           </div>
       <div id="footer">чтобы было, вдруг че</div>
@@ -22,6 +24,7 @@
 </template>
 
 <script>
+        import axios from "axios"
         import ls from "local-storage"
         const UserProfile = {
         name: "UserProfile",
@@ -41,8 +44,22 @@
                 ls.remove("photohubUser");
                 this.$router.push("/authenticate");
             },
-            uploadPhoto: function () {
-                this.$router.push('/uploadWindow');
+            handleFileUpload() {
+                const file = this.$refs.file.files[0];
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    axios.post("/api/image/upload", {
+                        email: this.email,
+                        base64: reader.result
+                    }).then(response => {
+                        if (response.status === 200) {
+                            this.$router.push('/');
+                        }
+                    })
+                });
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    reader.readAsDataURL(file);
+                }
             }
         }
     }

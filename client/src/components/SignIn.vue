@@ -51,7 +51,7 @@
                     return
                 }
 
-                axios.post("/api/auth", {
+                axios.post("/api/user/auth", {
                     email: this.email,
                     password: this.password
                 }).then(response => {
