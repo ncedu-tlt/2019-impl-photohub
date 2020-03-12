@@ -1,7 +1,5 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
-import com.netcracker.ncedu.tlt.impl.photohub.model.LoginData;
-import com.netcracker.ncedu.tlt.impl.photohub.model.User;
-import com.netcracker.ncedu.tlt.impl.photohub.model.UserRepository;
+import com.netcracker.ncedu.tlt.impl.photohub.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping(path="/api")
-public class APIController {
+@RequestMapping(path="/api/user")
+public class ApiController {
     @Autowired
     private UserRepository userRepository;
 
@@ -27,4 +25,5 @@ public class APIController {
         }
         else userRepository.save(user);
     }
+
 }
