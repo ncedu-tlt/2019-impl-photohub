@@ -8,10 +8,14 @@
           <div id="content">
             <h2>Лента(фоточки будут здесь)</h2>
                 <div class="container">
-                    <div class="post">
+                    <div>
+                        <div class="post">
+                            <li v-for="image in images" :key="image.id">{{image}}</li>
+                        </div>
                     </div>
+
                     <label>File Preview
-                        <input type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/>
+                        <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
                     </label>
                 </div>
           </div>
@@ -29,11 +33,22 @@
         const UserProfile = {
         name: "UserProfile",
             data: function () {
-                return {
+            return {
+                    posts:[],
                     user: {
                         email: ls.get('photohubUser')
                     },
                 }
+            },
+            created(){
+            axios.get('',{
+                params:{
+                    email:ls.get('photohubUser'),
+                }
+            })
+                .then(response=>{
+                this.images = response.data.base64;
+                })
             },
         methods: {
             like:function() {
