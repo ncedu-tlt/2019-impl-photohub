@@ -93,6 +93,7 @@
     ul {
         list-style-type: none;
         padding: 0;
+        color:red;
     }
 
     li {
