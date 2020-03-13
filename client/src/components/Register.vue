@@ -11,7 +11,7 @@
                 <input id="password" v-model="password" type="password" name="password">
 
             <p>
-                <button v-on:click="addNewUser">SignIN</button>
+                <button v-on:click="addNewUser">SignUP</button>
             </p>
 
             <div v-if="errors.length">
@@ -55,13 +55,14 @@
                 }
 
 
-                axios.post("/api/registration", {
+                axios.post("/api/user/registration", {
                     name: this.name,
                     email: this.email,
                     password: this.password
                 }).then(response => {
                     if (response.status === 200) {
                         this.users.push({name: this.name, email: this.email,password: this.password}),
+                        alert('Success'),
                         this.$router.push("/authenticate")
                     }
                 }).catch(error=>{

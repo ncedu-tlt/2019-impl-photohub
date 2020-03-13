@@ -1,13 +1,18 @@
+
 <template>
      <div class="wrapper">
-      <div id="header"><h1>User login</h1></div>
+      <div id="header"><h1>User: {{user.email}}</h1></div>
       <div id="sidebar">
         <p>avatar</p>
       </div>
           <div id="content">
             <h2>Лента(фоточки будут здесь)</h2>
                 <div class="container">
-                    <button v-on:click="uploadPhoto">Download</button>
+                    <div class="post">
+                    </div>
+                    <label>File Preview
+                        <input type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/>
+                    </label>
                 </div>
           </div>
       <div id="footer">чтобы было, вдруг че</div>
@@ -19,17 +24,42 @@
 </template>
 
 <script>
-    import ls from "local-storage"
+        import axios from "axios"
+        import ls from "local-storage"
         const UserProfile = {
         name: "UserProfile",
-
+            data: function () {
+                return {
+                    user: {
+                        email: ls.get('photohubUser')
+                    },
+                }
+            },
         methods: {
+            like:function() {
+                this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++;
+                this.post.hasBeenLiked = !this.post.hasBeenLiked;
+            },
             exitMethods:function(){
                 ls.remove("photohubUser");
                 this.$router.push("/authenticate");
             },
-            uploadPhoto: function () {
-                this.$router.push('/uploadWindow');
+            handleFileUpload() {
+                const file = this.$refs.file.files[0];
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    axios.post("/api/image/upload", {
+                        email: this.email,
+                        base64: reader.result
+                    }).then(response => {
+                        if (response.status === 200) {
+                            this.$router.push('/');
+                        }
+                    })
+                });
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    reader.readAsDataURL(file);
+                }
             }
         }
     }
@@ -38,15 +68,32 @@
 </script>
 
 <style>
-div.container img{
-    max-width: 200px;
-    max-height: 200px;
-  }
-wrapper {
-    width: 600px;
-    margin-left: 200px;
-    margin-top: 100px;
-   }
+    .image-container {
+        height: 330px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    .likes {
+        margin: 5px 0;
+/*
+        margin-bottom: 5px !important;
+*/
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+    div.post{
+
+    }
+    div.container img{
+        max-width: 200px;
+        max-height: 200px;
+      }
+    wrapper {
+        width: 600px;
+        margin-left: 200px;
+        margin-top: 100px;
+       }
    h1 {
     font-size: 36px;
     margin: 0;
