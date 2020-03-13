@@ -49,7 +49,7 @@
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
                     axios.post("/api/image/upload", {
-                        email: this.email,
+                        email: ls.get('photohubUser'),
                         base64: reader.result
                     }).then(response => {
                         if (response.status === 200) {
