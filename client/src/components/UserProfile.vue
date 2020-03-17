@@ -10,7 +10,7 @@
                 <div class="container">
                     <div>
                         <div class="post">
-                            <li v-for="image in images" :key="image.id">{{image}}</li>
+                            <li v-for="image in images" :key="image" :src="image"/>
                         </div>
                     </div>
 
@@ -35,19 +35,20 @@
             data: function () {
             return {
                     posts:[],
+                    images:[],
                     user: {
                         email: ls.get('photohubUser')
                     },
                 }
             },
-            created(){
+            created: function (){
             axios.get('',{
                 params:{
                     email:ls.get('photohubUser'),
                 }
             })
                 .then(response=>{
-                this.images = response.data.base64;
+                    images:base64;
                 })
             },
         methods: {
@@ -64,6 +65,7 @@
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
                     axios.post("/api/image/upload", {
+
                         email: ls.get('photohubUser'),
                         base64: reader.result
                     }).then(response => {
