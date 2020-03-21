@@ -10,8 +10,10 @@
                 <div class="container">
                     <div>
                         <div class="post">
-                            <li v-for="image in images" :key="image" :src="image"/>
+                            <img v-for="image in images" :key="image" :src="image"/>
+                            <button v-on:click="like">♥</button>:{{likes}}
                         </div>
+
                     </div>
 
                     <label>File Preview
@@ -36,25 +38,25 @@
             return {
                     posts:[],
                     images:[],
+                    likes:"",
                     user: {
                         email: ls.get('photohubUser')
                     },
                 }
             },
             created: function (){
-            axios.get('',{
-                params:{
-                    email:ls.get('photohubUser'),
-                }
-            })
+            axios.get("/api/image/get?email=" + this.user.email)
                 .then(response=>{
-                    images:base64;
+                    this.images=response.images;
+                    this.likes=response.likes;
                 })
             },
+
         methods: {
             like:function() {
-                this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++;
-                this.post.hasBeenLiked = !this.post.hasBeenLiked;
+                axios.post("", {
+                    likes:this.likes++
+                })
             },
             exitMethods:function(){
                 ls.remove("photohubUser");
