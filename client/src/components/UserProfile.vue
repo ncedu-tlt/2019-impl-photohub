@@ -8,10 +8,16 @@
           <div id="content">
             <h2>Лента(фоточки будут здесь)</h2>
                 <div class="container">
-                    <div class="post">
+                    <div>
+                        <div class="post">
+                            <img v-for="image in images" :key="image" :src="image"/>
+                            <button v-on:click="like">♥</button>:{{likes}}
+                        </div>
+
                     </div>
+
                     <label>File Preview
-                        <input type="file" id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/>
+                        <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
                     </label>
                 </div>
           </div>
@@ -29,16 +35,28 @@
         const UserProfile = {
         name: "UserProfile",
             data: function () {
-                return {
+            return {
+                    posts:[],
+                    images:[],
+                    likes:"",
                     user: {
                         email: ls.get('photohubUser')
                     },
                 }
             },
+            created: function (){
+            axios.get("/api/image/get?email=" + this.user.email)
+                .then(response=>{
+                    this.images=response.images;
+                    this.likes=response.likes;
+                })
+            },
+
         methods: {
             like:function() {
-                this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++;
-                this.post.hasBeenLiked = !this.post.hasBeenLiked;
+                axios.post("", {
+                    likes:this.likes++
+                })
             },
             exitMethods:function(){
                 ls.remove("photohubUser");
@@ -49,6 +67,7 @@
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
                     axios.post("/api/image/upload", {
+
                         email: ls.get('photohubUser'),
                         base64: reader.result
                     }).then(response => {

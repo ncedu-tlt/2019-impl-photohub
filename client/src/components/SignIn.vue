@@ -15,6 +15,7 @@
                 <router-link to="/Authorization">Not yet registrated ?</router-link>
             </p>
             <div v-if="errors.length">
+                <br>
                  <b>Please fill out the form correctly :</b>
             <ul>
                 <li v-for="error in errors" :key="error">{{ error }}</li>
@@ -78,6 +79,9 @@
 </script>
 
 <style>
+    errors{
+        font-color:red;
+    }
     .column_auth {
              width: 600px;
              margin-left: 200px;
@@ -98,6 +102,10 @@
 
     li {
         margin: 10px;
+        color:red;
+    }
+    b{
+        color:red;
     }
     .column_auth button{
         color: rgb(192, 192, 192);
