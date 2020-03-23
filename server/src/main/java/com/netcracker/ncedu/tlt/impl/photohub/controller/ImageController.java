@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 @RequestMapping(path="/api/image")
@@ -24,7 +24,11 @@ public class ImageController {
         photo.setBase64(uploadData.getBase64());
             photoRepository.save(photo);
             photo.setDate(new Date());
-        }
+                 }
     }
-
+    @GetMapping(path = "/get")
+    @ResponseBody
+    public Object getImagesByEmail(@RequestParam String email) throws IOException {
+        return photoRepository.findByEmail(email);
+    }
 }
