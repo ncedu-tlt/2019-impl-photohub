@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/api/image")
@@ -29,6 +30,9 @@ public class ImageController {
     @GetMapping(path = "/get")
     @ResponseBody
     public Object getImagesByEmail(@RequestParam String email) throws IOException {
-        return photoRepository.findByEmail(email);
+        return photoRepository.findByEmail(email)
+        .stream()
+        .map(Photo::getBase64)
+        .collect(Collectors.toList());
     }
 }
