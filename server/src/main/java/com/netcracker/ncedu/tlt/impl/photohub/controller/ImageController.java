@@ -1,11 +1,14 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
 import com.netcracker.ncedu.tlt.impl.photohub.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/api/image")
@@ -24,7 +27,17 @@ public class ImageController {
         photo.setBase64(uploadData.getBase64());
             photoRepository.save(photo);
             photo.setDate(new Date());
-        }
+                 }
     }
-
+    @GetMapping(path = "/get")
+    @ResponseBody
+    public Object getImagesByEmail(@RequestParam String email) throws IOException {
+        List<String> images = photoRepository.findByEmail(email)
+        .stream()
+        .map(Photo::getBase64)
+        .collect(Collectors.toList());
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("images", images);
+        return map;
+    }
 }
