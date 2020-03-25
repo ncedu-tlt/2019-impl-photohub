@@ -11,17 +11,20 @@
                     <div>
                         <div class="post">
                             <img v-for="image in images" :key="image" :src="image"/>
-                            <button v-on:click="like">♥</button>:{{likes}}
+                            <button v-on:click="like" style="width: 35px;">♥</button>:{{likes}}
                         </div>
-
+                        <button v-on:click="subscribe">Subscribe</button>
+                        <div v-for="subscribe in subscribers" :key="subscribe" >
+                            {{subscribe}} <button v-on:click="sign">Subscribe</button>
+                        </div>
                     </div>
 
-                    <label>File Preview
+                    <label>
                         <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
                     </label>
                 </div>
           </div>
-      <div id="footer">чтобы было, вдруг че</div>
+      <div id="footer">project by netcracker</div>
          <div class="buttonExit">
              <button v-on:click="exitMethods">Exit</button>
          </div>
@@ -39,6 +42,7 @@
                     posts:[],
                     images:[],
                     likes:"",
+                    subscribers:[],
                     user: {
                         email: ls.get('photohubUser')
                     },
@@ -58,6 +62,23 @@
                     likes:this.likes++
                 })
             },
+            subscribe:function() {
+                axios.post("")
+                .then(response=>{
+                    this.subscribers=response.subscribe;
+                })
+            },
+            sign:function() {
+                axios.post("",{
+                    email: this.user.email
+                })
+                    .then(response=>{
+                        if (response.status === 200) {
+                            alert('Success')
+                        }
+                    })
+            },
+
             exitMethods:function(){
                 ls.remove("photohubUser");
                 this.$router.push("/authenticate");
@@ -143,4 +164,55 @@
     color: #fff;
     clear: left;
    }
+     input[type="file" ] {
+         z-index: 1;
+         width: 245px;
+         padding-right: 10px;
+         white-space: nowrap;
+         text-overflow: ellipsis;
+         border: 1px solid #34383d;
+         background: #1c1e21;
+         color: #c0c0c0;
+         -o-text-overflow: ellipsis;
+         padding: 5px 15px;
+         border-radius: 5px;
+    }
+    button{
+        color: rgb(192, 192, 192);
+        text-shadow: 0 0 10px rgb(255, 255, 255);
+        cursor: pointer;
+        display: block;
+        position: relative;
+        width: 100px;
+        height: 35px;
+        color: rgb(192, 192, 192);
+        border-radius: 10px;
+        outline: 0;
+        z-index: 2;
+        background: rgb(28, 30, 33);
+        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
+        border: 6px solid rgb(52, 56, 61);
+        font-size: 15px;
+        text-indent: 0px;
+        margin: 10px 10px 20px 5px;
+    }
+    input[type=file]::-webkit-file-upload-button {
+        color: rgb(192, 192, 192);
+        text-shadow: 0 0 10px rgb(255, 255, 255);
+        cursor: pointer;
+        display: block;
+        position: relative;
+        width: 133px;
+        height: 35px;
+        color: rgb(192, 192, 192);
+        border-radius: 10px;
+        outline: 0;
+        z-index: 2;
+        background: rgb(28, 30, 33);
+        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
+        border: 6px solid rgb(52, 56, 61);
+        font-size: 15px;
+        text-indent: 0px;
+        margin: 5px 5px 10px 0px;
+    }
 </style>
