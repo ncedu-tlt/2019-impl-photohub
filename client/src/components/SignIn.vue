@@ -131,7 +131,7 @@
         width:840px;
     }
     errors{
-        font-color:red;
+        font-color:blue;
     }
     .column_auth {
              width: 600px;
