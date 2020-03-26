@@ -1,26 +1,26 @@
 <template>
-        <div class="column_reg">
-                <h1 style="
-                        margin-bottom: 10px;font-size: 50px;
-                    ">Registered</h1>
-                <label for="name">Name<br></label>
-                <input id="name" v-model="name" type="text" name="name">
-                <label for="email">Email<br></label>
-                <input id="email" v-model="email" type="email" name="email">
-                <label for="password">Password<br></label>
-                <input id="password" v-model="password" type="password" name="password">
+    <div class="wrapper">
+            <div class="form_reg">
+                <h1><img src="./../assets/Camera.png" height="32" width="37"> PHOTO<b style="color:black">HUB</b></h1>
+                <div class="separator_top"></div>
+                <input id="name" v-model="name" type="text" name="name" placeholder="name">
+                <input id="email" v-model="email" type="email" name="email" placeholder="email@email.com">
+                <input id="password" v-model="password" type="password" name="password" placeholder="pass">
 
-            <p>
-                <button v-on:click="addNewUser">SignUP</button>
-            </p>
+                <p>
+                    <button v-on:click="addNewUser">REGISTER IN PHOTOHUB</button>
+                </p>
+                <div class="separator_top" style="margin-top: 50px"></div>
 
-            <div v-if="errors.length">
-                <ul>
-                    <li v-for="error in errors" :key="error">{{ errors }}</li><br>
-                </ul>
+                <div v-if="errors.length">
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ errors }}</li><br>
+                    </ul>
+                </div>
             </div>
-        </div>
+    </div>
 </template>
+
 
 <script>
     import axios from "axios"
@@ -82,19 +82,21 @@
 </script>
 
 <style>
-    .column_reg {
-        width: 600px;
-        margin-left: 200px;
-        margin-top: 100px;
+    .wrapper{
+        margin-top: 10%;
+        margin-left: 20%;
+        margin-right: 5%;
+        height: 400px;
+        width:840px;
     }
-
-    h1 {
-        text-align:center;
-        font-size: 50px;
-
-
+    .form_reg h1 {
+        font-family: Sedgwick Ave;
+        align-items: center;
+        text-align: center;
+        color: #FFC800;
+        font-size: 35px;
+        margin-top: 30px;
     }
-
 
     ul {
         list-style-type: none;
@@ -105,53 +107,58 @@
     li {
         margin: 10px;
     }
-    .column_reg button{
-        color: rgb(192, 192, 192);
-        text-shadow: 0 0 10px rgb(255, 255, 255);
+    .form_reg button{
+        color: #000000;
+        text-shadow: 0 0 1px rgb(1,1,1);
         cursor: pointer;
-        display: block;
         position: relative;
-        width: 200px;
-        height: 70px;
-        color: rgb(192, 192, 192);
         border-radius: 50px;
         outline: 0;
         z-index: 2;
-        background: rgb(28, 30, 33);
-        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
-        border: 6px solid rgb(52, 56, 61);
-        font-size: 35px;
-        text-indent: 0px;
-}
+        border: 1px solid rgb(52, 56, 61);
+        background: #FFC800;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        width: 250px;
+        margin:15px 0% 0% 20%;
+        padding: 5px;
+        display: inline-block;
+    }
 
-    .column_reg label {
-        color: rgb(192, 192, 192);
-        height:45px;
-        width:170px;
-        font-size: 30px;
-        float: left;
+    .form_reg input {
+        background: #FFFFFF;
+        border: 1px solid rgba(1, 28, 64, 0.25);
+        box-sizing: border-box;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        width: 250px;
+        height: 35px;
+        margin:20px 5% 5px 20%;
+        padding: 10px;
     }
-    .column_reg input {
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 8px;
-        float:right;
-        position: relative;
-        display: block;
-        width: 280px;
-        height: 45px;
-        outline: 0;
-        top: -2px;
-        padding: 0 0 0 20px;
-        font-weight: 700;
-        font-weight: 700;
-        font-size:25px;
-        background: rgb(28, 30, 33);
-        text-shadow:0 0 10px rgb(255, 255, 255);
-        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
-        color: rgb(192, 192, 192);
+
+    input::-webkit-input-placeholder {
+        color: rgba(0, 0, 0, 0.25);;
+        font-size: 18px;
+        line-height: 21px;
     }
-    .column_reg p{
+    .separator_top{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin:20px 20px 1px 20px;
+    }
+    .separator_top::before, .separator_top::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #000;
+    }
+    .form_reg{
+        width: 450px;
+        height: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        float:left;
+        margin:5% 1% 1% 1%;
     }
 </style>

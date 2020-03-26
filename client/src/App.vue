@@ -1,8 +1,5 @@
 <template>
-  <div id="app">
-     <div class="logo">
-     <img alt="Vue logo" src="./assets/PhotoHub.png">
-     </div>
+  <div class="app">
     <router-view/>
   </div>
 </template>
@@ -13,25 +10,7 @@ export default {
 }
 </script>
 <style>
-body{
-        background-image: url('/assets/background2.jpg');
-        background-color:rgb(0, 0, 0);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        margin: auto;
-        position: absolute;
-        top: 5%;
-        margin-left: 10%;
-        margin-right: 10%;
-}
-.logo{
-margin: auto;
-text-align:center
-}
-    #app {
-        @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
-        font-family: 'Press Start 2P', cursive;
-        color: rgb(255, 255, 255);
+    body{
+        background-color: #F3F3F3;
     }
-
 </style>

@@ -1,32 +1,43 @@
 
 <template>
-     <div class="wrapper">
-      <div id="header"><h1>User: {{user.email}}</h1></div>
-      <div id="sidebar">
-        <p>avatar</p>
+     <div class="profile">
+      <div class="header">
+          <div class="header logo">
+              <h1><img src="./../assets/Camera.png" height="32" width="37">
+                  PHOTOHUB</h1>
+          </div>
+          <div class="header user">
+              <h1><img src="./../assets/user.png" height="32" width="37"> {{user.email}}
+
+              </h1>
+          </div>
       </div>
-          <div id="content">
-            <h2>Лента(фоточки будут здесь)</h2>
+         <div class="feel">
+          <div class="slidebar">
+            <p>Navigation</p>
+              <button v-on:click="exitMethods">Exit</button>
+              <button v-on:click="subscribe">Subscribe</button>
+              <label>
+                  <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
+              </label>
+          </div>
+          <div class="content">
+            <h2>Лента</h2>
                 <div class="container">
                     <div>
                         <div class="post">
                             <img v-for="image in images" :key="image" :src="image"/>
-                            <button v-on:click="like" style="width: 35px;">♥</button>:{{likes}}
+                            <button v-on:click="like" style="width: 35px;margin-top: 390px">
+                                <img src="./../assets/like.png" height="24" width="24">
+                            </button>:{{likes}}
                         </div>
-                        <button v-on:click="subscribe">Subscribe</button>
+
                         <div v-for="subscribe in subscribers" :key="subscribe" >
                             {{subscribe}} <button v-on:click="sign">Subscribe</button>
                         </div>
                     </div>
-
-                    <label>
-                        <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
-                    </label>
                 </div>
           </div>
-      <div id="footer">project by netcracker</div>
-         <div class="buttonExit">
-             <button v-on:click="exitMethods">Exit</button>
          </div>
      </div>
 
@@ -108,20 +119,7 @@
 </script>
 
 <style>
-    .image-container {
-        height: 330px;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-    }
-    .likes {
-        margin: 5px 0;
-/*
-        margin-bottom: 5px !important;
-*/
-        font-size: 0.85rem;
-        font-weight: bold;
-    }
+
     div.post{
 
     }
@@ -129,90 +127,130 @@
         max-width: 200px;
         max-height: 200px;
       }
-    wrapper {
-        width: 600px;
-        margin-left: 200px;
-        margin-top: 100px;
+    .profile {
+
        }
-   h1 {
-    font-size: 36px;
-    margin: 0;
-    color: #ffaa2a;
-   }
-   h2 {
-    margin-top: 0;
-   }
-   #header {
-    background: rgb(0,0,0);
-    padding: 10px;
-   }
-   #sidebar {
-    float: left;
-    border: 1px solid #333;
-    width: 20%;
-    padding: 5px;
-    margin: 10px 10px 20px 5px;
-   }
-   #content {
-    margin: 10px 5px 20px 25%;
-    padding: 5px;
-    border: 1px solid #333;
-   }
-   #footer {
-    background: #333;
-    padding: 5px;
-    color: #fff;
-    clear: left;
-   }
-     input[type="file" ] {
-         z-index: 1;
-         width: 245px;
-         padding-right: 10px;
+    .header{
+        heigt:100%;
+        background: #FFC800;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        padding-left: 10px;
+        padding-right: 30px;
+    }
+    .feel {
+        margin-top: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+
+    }
+     .logo{
+        float:left;
+         box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+     .user{
+        float:right;
+         box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+    .header h1 {
+        font-family: Sedgwick Ave;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        font-size: 35px;
+        margin-top: 10px;
+    }
+     .slidebar{
+         float:left;
+         width: 150px;
+         height: 600px;
+         background: #FFFFFF;
+         padding-left: 20px;
+         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+         border-radius: 10px;
+     }
+    .content{
+        width: 550px;
+        height: 800px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        float:left;
+        margin-bottom: 40px;
+        margin-left: 2%;
+        padding: 1% 4% 1% 4%;
+    }
+    .slidebar button{
+        color: #000000;
+        text-shadow: 0 0 1px rgb(1,1,1);
+        cursor: pointer;
+        position: relative;
+        border-radius: 50px;
+        outline: 0;
+        z-index: 2;
+        border: 1px solid rgb(52, 56, 61);
+        background: #FFC800;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        width: 100px;
+        margin:20px 5% 1% 1%;
+        padding: 5px;
+        display: inline-block;
+    }
+    .content button{
+        color: #ffffff;
+        text-shadow: 0 0 1px rgb(1,1,1);
+        cursor: pointer;
+        position: relative;
+        border-radius: 50px;
+        outline: 0;
+        z-index: 2;
+        border: 1px solid rgb(52, 56, 61);
+        background: #ffc800;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        width: 25px;
+        margin:20px 5% 1% 1%;
+        padding: 5px;
+        display: inline-block;
+    }
+    .slidebar p{
+        color: rgb(0, 0, 0);
+        padding: 1px 20px;
+        font-weight: 700;
+        margin: 5px 0 0 0;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+    }
+     .slidebar input[type="file" ] {
          white-space: nowrap;
          text-overflow: ellipsis;
-         border: 1px solid #34383d;
-         background: #1c1e21;
-         color: #c0c0c0;
          -o-text-overflow: ellipsis;
-         padding: 5px 15px;
-         border-radius: 5px;
+         color: #000000;
+         text-shadow: 0 0 1px rgb(1,1,1);
+         cursor: pointer;
+         position: relative;
+         border-radius: 50px;
+         outline: 0;
+         z-index: 2;
+         border: 1px solid rgb(52, 56, 61);
+         background: #FFC800;
+         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+         width: 100px;
+         margin:20px 5% 1% 1%;
+         padding: 5px;
+         display: inline-block;
     }
-    button{
-        color: rgb(192, 192, 192);
-        text-shadow: 0 0 10px rgb(255, 255, 255);
-        cursor: pointer;
-        display: block;
-        position: relative;
-        width: 100px;
-        height: 35px;
-        color: rgb(192, 192, 192);
+    .post{
+        float:left;
+        width: 480px;
+        height: 450px;
+        background: #FFFFFF;
+        padding-left: 20px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-        outline: 0;
-        z-index: 2;
-        background: rgb(28, 30, 33);
-        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
-        border: 6px solid rgb(52, 56, 61);
-        font-size: 15px;
-        text-indent: 0px;
-        margin: 10px 10px 20px 5px;
     }
-    input[type=file]::-webkit-file-upload-button {
-        color: rgb(192, 192, 192);
-        text-shadow: 0 0 10px rgb(255, 255, 255);
-        cursor: pointer;
-        display: block;
-        position: relative;
-        width: 133px;
-        height: 35px;
-        color: rgb(192, 192, 192);
-        border-radius: 10px;
-        outline: 0;
-        z-index: 2;
-        background: rgb(28, 30, 33);
-        box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
-        border: 6px solid rgb(52, 56, 61);
-        font-size: 15px;
-        text-indent: 0px;
-        margin: 5px 5px 10px 0px;
+    .post lile{
+        float:bottom;
     }
 </style>
