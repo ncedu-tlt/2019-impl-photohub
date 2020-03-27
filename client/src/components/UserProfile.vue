@@ -25,8 +25,8 @@
             <h2>Лента</h2>
                 <div class="container">
                     <div>
-                        <div class="post">
-                            <img v-for="image in images" :key="image" :src="image"/>
+                        <div class="post" v-for="image in images" :key="image">
+                            <img :src="image"/>
                             <button v-on:click="like" style="width: 35px;margin-top: 390px">
                                 <img src="./../assets/like.png" height="24" width="24">
                             </button>:{{likes}}
@@ -62,8 +62,9 @@
             created: function (){
             axios.get("/api/image/get?email=" + this.user.email)
                 .then(response=>{
-                    this.images=response.images;
-                    this.likes=response.likes;
+                    this.images=response.data.images;
+                    this.likes=response.data.likes;
+                    console.log(response);
                 })
             },
 
@@ -171,7 +172,6 @@
      }
     .content{
         width: 550px;
-        height: 800px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
@@ -242,13 +242,15 @@
          display: inline-block;
     }
     .post{
-        float:left;
+        display: flex;
+        align-content: center;
         width: 480px;
         height: 450px;
         background: #FFFFFF;
         padding-left: 20px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
+        margin-bottom: 15px;
     }
     .post lile{
         float:bottom;

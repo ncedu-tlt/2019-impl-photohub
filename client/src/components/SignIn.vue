@@ -20,9 +20,9 @@
             </p>
                 <div class="separator">or</div>
                 <div class="social_web">
-                    <button v-on:click="facebook" style="width: 35px"><img src="./../assets/facebook.png" height="24" width="24"></button>
-                    <button v-on:click="google" style="width: 35px" ><img src="./../assets/google.png" height="24" width="24"></button>
-                    <button v-on:click="twitter"  style="width: 35px"><img src="./../assets/twitter.png" height="24" width="24"></button>
+                    <img src="./../assets/facebook.png" height="24" width="24">
+                    <img src="./../assets/google.png" height="24" width="24">
+                    <img src="./../assets/twitter.png" height="24" width="24">
                 </div>
 
 
@@ -65,11 +65,8 @@
         computed: {
             images() {
                 return [
-                    require("../assets/images/3.png"),
                     require("../assets/images/4.png"),
-
-
-
+                    require("../assets/images/3.png"),
                 ];
             }
         },
@@ -107,7 +104,6 @@
                 return emailRegEx.test(email);
             },
             init() {
-                //We loop through all our images by calling the 'next' method of our component every 2 seconds
                 setInterval(() => {
                     this.$refs.slideshow.next();
                 }, 2000);
@@ -270,7 +266,7 @@
     }
     .content_feed{
         width: 450px;
-        height: 600px;
+        height: 550px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
