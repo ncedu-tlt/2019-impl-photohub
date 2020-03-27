@@ -13,7 +13,7 @@
           </div>
       </div>
          <div class="feel">
-          <div class="slidebar">
+          <div class="sidebar">
             <p>Navigation</p>
               <button v-on:click="exitMethods">Exit</button>
               <button v-on:click="subscribe">Subscribe</button>
@@ -132,14 +132,14 @@
 
        }
     .header{
-        heigt:100%;
+        height:100%;
         background: #FFC800;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         overflow: hidden;
         padding-left: 10px;
         padding-right: 30px;
     }
-    .feel {
+    .feed {
         margin-top: 5%;
         margin-left: 5%;
         margin-right: 5%;
@@ -161,7 +161,7 @@
         font-size: 35px;
         margin-top: 10px;
     }
-     .slidebar{
+     .sidebar{
          float:left;
          width: 150px;
          height: 600px;
@@ -180,7 +180,7 @@
         margin-left: 2%;
         padding: 1% 4% 1% 4%;
     }
-    .slidebar button{
+    .sidebar button{
         color: #000000;
         text-shadow: 0 0 1px rgb(1,1,1);
         cursor: pointer;
@@ -212,7 +212,7 @@
         padding: 5px;
         display: inline-block;
     }
-    .slidebar p{
+    .sidebar p{
         color: rgb(0, 0, 0);
         padding: 1px 20px;
         font-weight: 700;
@@ -222,7 +222,7 @@
         display: flex;
         align-items: center;
     }
-     .slidebar input[type="file" ] {
+     .sidebar input[type="file" ] {
          white-space: nowrap;
          text-overflow: ellipsis;
          -o-text-overflow: ellipsis;
