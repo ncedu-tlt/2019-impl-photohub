@@ -18,9 +18,11 @@
     "vue-displacement-slideshow": "^2.3.1",
     "vue-error-page": "^1.1.7",
     "vue-file-base64": "^1.0.2",
+    "vue-notification": "^1.3.20",
     "vue-picture-input": "^2.1.6",
     "vue-resource": "^1.5.1",
-    "vue-router": "^3.1.5"
+    "vue-router": "^3.1.5",
+    "vueup": "^1.3.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.0",
