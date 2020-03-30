@@ -9,7 +9,18 @@
               <h1>
                   {{user.email}}
                   <img src="./../assets/user.png" height="32" width="37">
-
+                  <button class="menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                      <div v-show="menu_show">
+                          <button v-on:click="exitMethods">Exit</button>
+                          <button v-on:click="subscribe">Subscribe</button>
+                          <div class="upload_photo">
+                              Upload
+                              <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
+                          </div>
+                      </div>
+                  </button>
               </h1>
           </div>
       </div>
@@ -40,32 +51,24 @@
                       <circle cx="38.0208" cy="20.3125" r="1.5625" stroke="black" stroke-opacity="0.25" stroke-width="3"/>
                   </svg>
               </div>
-              <button v-on:click="exitMethods">Exit</button>
-              <button v-on:click="subscribe">Subscribe</button>
-              <div class="upload_photo">
-                  Upload
-                  <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
-              </div>
           </div>
 
           <div class="content">
               <form class="search-form">
                   <input type="search" value="" placeholder="Search" class="search-input">
               </form>
-                <div class="container">
-                    <div>
-                        <div class="post" v-for="image in images" :key="image">
-                            <img :src="image"/>
-                            <button v-on:click="like" style="width: 35px;margin-top: 390px">
-                                <img src="./../assets/like.png" height="24" width="24">
-                            </button>:{{likes}}
-                        </div>
-
-                        <div v-for="subscribe in subscribers" :key="subscribe" >
-                            {{subscribe}} <button v-on:click="sign">Subscribe</button>
-                        </div>
+              <div class="container">
+                    <div class="post" v-for="image in images" :key="image">
+                        <img :src="image"/>
+                        <button v-on:click="like">
+                            <img src="./../assets/like.png" style=" width:24px; height:24px">
+                        </button>{{likes}}
                     </div>
-                </div>
+
+                    <div v-for="subscribe in subscribers" :key="subscribe" >
+                        {{subscribe}} <button v-on:click="sign">Subscribe</button>
+                    </div>
+              </div>
           </div>
          </div>
      </div>
@@ -86,6 +89,7 @@
                     user: {
                         email: ls.get('photohubUser')
                     },
+                    menu_show:false,
                 }
             },
             created: function (){
@@ -98,6 +102,9 @@
             },
 
         methods: {
+            menu:function(){
+                this.menu_show=true;
+            },
             like:function() {
                 axios.post("", {
                     likes:this.likes++
@@ -149,14 +156,14 @@
 </script>
 
 <style>
-
+    .header_user button{
+        outline: none;
+        border: 0;
+        background: transparent;
+    }
     div.post{
 
     }
-    div.container img{
-        max-width: 200px;
-        max-height: 200px;
-      }
     .profile {
 
        }
@@ -171,10 +178,6 @@
         padding-left: 10px;
         padding-right: 30px;
         text-align: justify;
-
-
-
-
     }
 
     .header h1 {
@@ -196,14 +199,13 @@
 
      }
     .content{
-        width: 600px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         float:left;
-        margin-bottom: 40px;
-        margin-left: 2%;
-        padding: 1% 4% 1% 4%;
+        margin-bottom: 10px;
+        margin-left: 1%;
+        padding: 1% 1% 1% 1%;
         min-height: 580px;
     }
     .sidebar button{
@@ -233,7 +235,8 @@
         border: 1px solid rgb(52, 56, 61);
         background: #ffc800;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-        width: 25px;
+        width: 35px;
+        height: 35px;
         margin:20px 5% 0% 0%;
         padding: 5px;
         display: inline-block;
@@ -247,26 +250,35 @@
         line-height: 21px;
         display: flex;
     }
-
+    .container{
+        width: 750px;
+    }
     .post{
-        align-content: center;
-        width: 250px;
-        height: 250px;
-        background: #FFFFFF;
-        border-radius: 10px;
-        margin-bottom: 15px;
-
+        margin-bottom: 35px;
+        width:350px;
+        height: 300px;
+        border: 3px solid #a3a1a6;
+        display: inline-block;
+        margin-left: 1%;
+    }
+    .container img{
+        width: 340px;
+        height: 240px;
     }
     .post like{
         float:bottom;
+        float:left;
     }
-    .header header_uesr{
+    .header_user{
         float: right;
+        display: inline-block;
+        margin-right: 5%;
 
     }
-    .header header_logo{
+    .header_logo{
         float: left;
-
+        display: inline-block;
+        margin-left: 5%;
     }
     .upload_photo{
         font-size: 15px;
