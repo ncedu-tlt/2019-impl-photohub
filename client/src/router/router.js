@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import Authenticate from "../components/Authenticate"
 import Authorization from "../components/Authorization"
 import Profile from "../components/Profile"
+import Main from "../components/Main"
 import ls from "local-storage"
 
 Vue.use(VueRouter);
@@ -12,7 +13,8 @@ const router = new VueRouter({
     routes: [
         {path: '/', name: 'profile', component: Profile,meta: { requiresAuth: true }},
         {path: '/authorization', name: 'Authorization', component: Authorization},
-        {path: '/authenticate', name: 'Authenticate', component: Authenticate}
+        {path: '/authenticate', name: 'Authenticate', component: Authenticate},
+        {path:'/main',name:'Main',component:Main},
 
 
 

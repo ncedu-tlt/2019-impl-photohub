@@ -13,13 +13,17 @@
                       <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                       <div class="menu_show" v-if="menu_show">
+                          <button  v-on:click="mainPage">Main</button>
                           <button v-on:click="exitMethods">Exit</button>
                           <button v-on:click="subscribe">Subscribe</button>
                           <button><div class="upload_photo">
                               Upload
                               <input type="file" id="file" ref="file" accept="image/*" :width="500" :height="500" v-on:change="handleFileUpload()"/>
                           </div></button>
-                          <button v-on:click="upload_avatar">Avatar</button>
+                          <button><div class="uploadAvatar">
+                              Avatar
+                              <input type="file" id="fileAvatar" ref="file" accept="image/*" :width="500" :height="500" v-on:change="uploadAvatar()"/>
+                          </div></button>
                       </div>
                   </button>
               </h1>
@@ -156,6 +160,7 @@
                 })
             },
 
+
         methods: {
             menu:function(){
                 this.menu_show=!this.menu_show;
@@ -181,7 +186,9 @@
                         }
                     })
             },
-
+            mainPage:function(){
+                this.$router.push("/main");
+            },
             exitMethods:function(){
                 ls.remove("photohubUser");
                 this.$router.push("/authenticate");
@@ -202,6 +209,24 @@
                 });
                 if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
                     reader.readAsDataURL(file);
+                }
+            },
+            uploadAvatar() {
+                const fileAvatar= this.$refs.file.files[0];
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    axios.post("/api/image/upload/avatar", {
+
+                        email: ls.get('photohubUser'),
+                        base64: reader.result
+                    }).then(response => {
+                        if (response.status === 200) {
+                            this.$router.push('/');
+                        }
+                    })
+                });
+                if (/\.(jpe?g|png|gif)$/i.test(fileAvatar.name)) {
+                    reader.readAsDataURL(fileAvatar);
                 }
             }
         }
@@ -238,7 +263,7 @@
     .menu_show{
         position: absolute;
         width: 120px;
-        height: 180px;
+        height: 200px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
@@ -354,24 +379,6 @@
         float: left;
         display: inline-block;
         margin-left: 5%;
-    }
-    .upload_photo{
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        font-size: 15px;
-        color: #000000;
-        cursor: pointer;
-        position: relative;
-        outline: 0;
-        z-index: 2;
-        width: 90px;
-        margin:10px 0% 0% 0%;
-        height: 15px;
-        display: inline-block;
-        text-align: center;
-
     }
     div.upload_photo input:hover {
         background-color: #ffe380;
