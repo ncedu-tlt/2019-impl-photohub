@@ -16,4 +16,9 @@ export default {
         background-color: #F3F3F3;
         margin: 0
     }
+  .vue-notification-group{
+    margin: 0 5px 5px;
+    font-size: 12px;
+    color: #ffffff;
+  }
 </style>

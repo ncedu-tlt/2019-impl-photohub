@@ -1,5 +1,6 @@
 <template>
         <div class="wrapper">
+            <notifications classes="my-style"/>
             <div class="content_feed">
                 <vue-displacement-slideshow
                         :images="images"
@@ -36,6 +37,7 @@
 
 
             </div>
+
             <div class="error" v-if="errors.length">
                 <br>
                  <b>Please fill out the form correctly :</b>
@@ -82,9 +84,9 @@
         methods: {
             auth: function () {
                 if (!this.email) {
-                    this.errors.push("Enter user email")
+                    this.$notify({ group: 'foo', text: 'Enter user email' })
                 } else if (!this.validateEmail(this.email)) {
-                    this.errors.push("Enter valid email address")
+                    this.$notify({ group: 'foo', text: 'Enter valid email address' })
                 }
 
                 if (this.errors.length) {
@@ -99,10 +101,8 @@
                         ls.set("photohubUser", this.email);
                         this.$router.push("/");
                     } else if (response.status === 404) {
-                        this.errors.push("User not found")
+                        this.$notify({ group: 'foo', text: 'User not found, please try again' })
                     }
-                }).catch(error => {
-                    this.errors.push("User not found " + error)
                 })
             },
             rout_to_reg: function () {
@@ -302,7 +302,5 @@
         text-align: center;
         vertical-align: middle;
         padding-top: 8px;
-
-
     }
 </style>

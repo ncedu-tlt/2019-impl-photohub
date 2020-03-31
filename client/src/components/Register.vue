@@ -4,23 +4,24 @@
                 <h1><img src="./../assets/Camera.png" height="32" width="37"> PHOTO<b style="color:black">HUB</b></h1>
                 <div class="separator_top"></div>
 
-                    <input id="name" v-model="name" type="text" name="name" placeholder="name"><div class="tick" v-show="confirm_name"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <input id="name" v-model="name" type="text" name="name" placeholder="name"><div class="tick" v-if="confirm_name"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.00002 11.2L1.80002 7L0.400024 8.4L6.00002 14L18 2L16.6 0.599998L6.00002 11.2Z" fill="#75DB6D"/>
                 </svg>
                 </div>
-                    <input id="email" v-model="email" type="email" name="email" placeholder="email@email.com"><div class="tick" v-show="confirm_email"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <input id="email" v-model="email" type="email" name="email" placeholder="email@email.com"><div class="tick" v-if="confirm_email"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.00002 11.2L1.80002 7L0.400024 8.4L6.00002 14L18 2L16.6 0.599998L6.00002 11.2Z" fill="#75DB6D"/>
                 </svg>
                 </div>
-                    <input id="password" v-model="password" type="password" name="password" placeholder="pass"><div class="tick" v-show="confirm_password"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <input id="password" v-model="password" type="password" name="password" placeholder="pass"><div class="tick" v-if="confirm_password"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.00002 11.2L1.80002 7L0.400024 8.4L6.00002 14L18 2L16.6 0.599998L6.00002 11.2Z" fill="#75DB6D"/>
                 </svg>
                 </div>
-                    <input id="confirm_password" v-model="password" type="password" name="confirm_password" placeholder="confirm pass"><div class="tick" v-show="confirm_repass"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <input id="confirm_password" v-model="confirmPassword" type="password" name="confirm_password" placeholder="confirm pass">
+                <div class="tick" v-if="confirm_repass">
+                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.00002 11.2L1.80002 7L0.400024 8.4L6.00002 14L18 2L16.6 0.599998L6.00002 11.2Z" fill="#75DB6D"/>
-                </svg>
-
-            </div>
+                    </svg>
+                </div>
 
                 <p>
                     <button v-on:click="addNewUser">REGISTER IN PHOTOHUB</button>
@@ -49,23 +50,12 @@
                 name: null,
                 email: null,
                 password:null,
+                confirmPassword:null,
                 confirm_name:false,
                 confirm_password:false,
                 confirm_email: false,
                 confirm_repass:false,
 
-            }
-        },
-        computed:{
-            confirm_name:function() {
-                if (this.name) {
-                    this.confirm_name = true;
-                }
-            },
-            confirm_email:function() {
-                if (this.email) {
-                    this.confirm_email = true;
-                }
             }
         },
         methods: {
@@ -85,7 +75,18 @@
                     return
                 }
 
-
+                if(this.confirmPassword===this.password){
+                    this.confirm_repass=true;
+                }
+                if(this.name){
+                    this.confirm_name=true;
+                }
+                if(this.email){
+                    this.confirm_email=true;
+                }
+                if(this.password){
+                    this.confirm_password=true;
+                }
                 axios.post("/api/user/registration", {
                     name: this.name,
                     email: this.email,

@@ -7,11 +7,11 @@ import router from "./router/router"
 
 
 Vue.config.productionTip = false;
-
+Vue.use(Notifications);
 
 new Vue({
   router,
-  Notifications,
+
 
 
   render: h => h(App),
