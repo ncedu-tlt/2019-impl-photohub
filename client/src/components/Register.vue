@@ -63,12 +63,12 @@
                 this.errors = [];
 
                 if (!this.name) {
-                    this.errors.push("Enter user name")
+                    this.$notify({ group: 'foo', text: 'Enter user name' })
                 }
                 if (!this.email) {
-                    this.errors.push("Enter user email")
+                    this.$notify({ group: 'foo', text: 'Enter user email' })
                 } else if (!this.validateEmail(this.email)) {
-                    this.errors.push("Enter valid email address")
+                    this.$notify({ group: 'foo', text: 'Enter valid email address' })
                 }
 
                 if (this.errors.length) {
@@ -98,7 +98,7 @@
                         this.$router.push("/authenticate")
                     }
                 }).catch(error=>{
-                    this.errors.push(error.response.data.message)
+                    this.$notify({ group: 'foo', text: (error.response.data.message) })
                 })
 
             },
