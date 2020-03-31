@@ -21,4 +21,7 @@ export default {
     font-size: 12px;
     color: #ffffff;
   }
+  .vue-notification-group .error{
+
+  }
 </style>
