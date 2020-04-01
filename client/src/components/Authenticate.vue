@@ -12,5 +12,5 @@ export default {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave&display=swap');
 </style>
