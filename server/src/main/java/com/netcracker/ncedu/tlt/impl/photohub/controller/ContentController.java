@@ -21,7 +21,6 @@ import java.util.Map;
 public class ContentController {
     @Autowired
     private PhotoRepository photoRepository;
-
     @GetMapping(path = "/get_content")
     @ResponseBody
     public Object getImagesById(@RequestParam Integer id, String email) throws IOException {
