@@ -1,22 +1,16 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
-public class Photo {
+public class Avatar {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-
-    private boolean archive = false;
-
-    private Date date;
 
     private String base64;
 
@@ -28,22 +22,6 @@ public class Photo {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public boolean isArchive() {
-        return archive;
-    }
-
-    public void setArchive(boolean archive) {
-        this.archive = archive;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getBase64() {
@@ -61,6 +39,4 @@ public class Photo {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 }
