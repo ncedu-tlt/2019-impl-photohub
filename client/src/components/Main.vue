@@ -24,6 +24,9 @@
                   <input type="search" value="" placeholder="Search" class="search-input">
               </form>
                 <div class="postMain" v-for="image in images" :key="image">
+                    <div>
+                        {{emailUser}}
+                    </div>
                     <img :src="image"/>
                     <button v-on:click="like">
                         <img src="./../assets/like.png" style=" width:24px; height:24px">
@@ -51,14 +54,16 @@
                     user: {
                         email: ls.get('photohubUser')
                     },
+                    emailUser:'',
                     menu_show:false,
                 }
             },
             created: function (){
-            axios.get("/api/image/get?email=" + this.user.email)
+            axios.get("/api/contentfeed")
                 .then(response=>{
                     this.images=response.data.images;
                     this.likes=response.data.likes;
+                    this.emailUser=response.data.email;
                 })
             },
 

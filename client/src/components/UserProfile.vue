@@ -26,7 +26,12 @@
           <div class="header_user">
               <h1>
                   {{user.email}}
-                  <img src="./../assets/user.png" height="32" width="37">
+                  <div class="avatar" v-if="avatar_show">
+                      <img v-for="avatars in avatar" :key="avatars" :src="avatars"/>
+                  </div>
+                  <div class="avatar" v-else>
+                      <img src="./../assets/user.png" height="32" width="37">
+                  </div>
                   <button class="menu" v-on:click="menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -50,10 +55,15 @@
          <div class="feel">
           <div class="sidebar">
               <div class="ico_user">
-                  <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <ellipse cx="64" cy="34.6667" rx="24" ry="26.6667" fill="#FFC800"/>
-                      <path d="M112 101.333C112 117.534 87.5642 112 64 112C40.4359 112 16 117.534 16 101.333C16 85.133 40.4359 72 64 72C87.5642 72 112 85.133 112 101.333Z" fill="#FFC800"/>
-                  </svg>
+                  <div class="avatar" v-if="avatar_show">
+                      <img v-for="avatars in avatar" :key="avatars" :src="avatars"/>
+                  </div>
+                  <div class="avatar" v-else>
+                      <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <ellipse cx="64" cy="34.6667" rx="24" ry="26.6667" fill="#FFC800"/>
+                          <path d="M112 101.333C112 117.534 87.5642 112 64 112C40.4359 112 16 117.534 16 101.333C16 85.133 40.4359 72 64 72C87.5642 72 112 85.133 112 101.333Z" fill="#FFC800"/>
+                      </svg>
+                  </div>
               </div>
               <p style="font-size: 18px;">{{user.email}}
               </p>
@@ -162,12 +172,14 @@
             return {
                     posts:[],
                     images:[],
+                    avatar:[],
                     likes:"",
                     subscribers:[],
                     user: {
                         email: ls.get('photohubUser')
                     },
                     menu_show:false,
+                    avatar_show:false,
                 }
             },
             created: function (){
@@ -176,6 +188,17 @@
                     this.images=response.data.images;
                     this.likes=response.data.likes;
                 })
+            },
+            created:function(){
+            axios.get("/api/image/get/avatar")
+                .then(response=>{
+                    this.avatar=response.data.images;
+                })
+            },
+            created:function(){
+                if(this.avatar){
+                    this.avatar_show=true;
+                }
             },
 
 
