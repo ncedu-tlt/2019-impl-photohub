@@ -1,8 +1,6 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
 import com.netcracker.ncedu.tlt.impl.photohub.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +13,7 @@ import java.util.stream.Collectors;
 public class ImageController {
     @Autowired
     private PhotoRepository photoRepository;
+    private AvatarRepository avatarRepository;
 
     @PostMapping(path = "/upload")
     public void addImage(@RequestBody UploadData uploadData, HttpServletResponse response) throws IOException {
@@ -40,4 +39,31 @@ public class ImageController {
         map.put("images", images);
         return map;
     }
+
+    @PostMapping(path = "/upload/avatar")
+    public void addProfile(@RequestBody UploadData profile, HttpServletResponse response) throws IOException {
+        if(avatarRepository.existsByEmailAndBase64(profile.getEmail(), profile.getBase64())) {
+            response.sendError(409, "Такое изображение уже загружено" );
+        }
+
+        else { Avatar avatar =  new Avatar();
+            avatar.setEmail(profile.getEmail());
+            avatar.setBase64(profile.getBase64());
+            avatarRepository.save(avatar);
+        }
+    }
+
+    @GetMapping(path = "/get/avatar")
+    @ResponseBody
+    public Object getImagesByEmailFromAvatar(@RequestParam String email) throws IOException {
+        List<String> images = avatarRepository.findByEmail(email)
+                .stream()
+                .map(Avatar::getBase64)
+                .collect(Collectors.toList());
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("images", images);
+        return map;
+    }
+
+
 }
