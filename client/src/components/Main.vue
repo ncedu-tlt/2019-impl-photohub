@@ -64,7 +64,7 @@
                 }
             },
             created: function (){
-            axios.get("/api/contentfeed")
+            axios.get("/api/contentfeed/get_content")
                 .then(response=>{
                     this.images=response.data.images;
                     this.likes=response.data.likes;
