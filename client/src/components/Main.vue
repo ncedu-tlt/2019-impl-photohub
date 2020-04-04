@@ -8,7 +8,12 @@
           <div class="header_user">
               <h1>
                   {{user.email}}
-                  <img src="./../assets/user.png" height="32" width="37">
+                  <div class="avatar" v-if="avatar_show">
+                      <img v-for="avatars in avatar" :key="avatars" :src="avatars" style="width: 100%"/>
+                  </div>
+                  <div class="avatar" v-else>
+                      <img src="./../assets/user.png" height="32" width="32">
+                  </div>
                   <button class="menu" v-on:click="menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -64,7 +69,12 @@
                     this.images=response.data.images;
                     this.likes=response.data.likes;
                     this.emailUser=response.data.email;
-                })
+                });
+            axios.get("/api/image/get/avatar")
+                .then(response=>{
+                    this.avatar_show=true;
+                    this.avatar=response.data.images;
+                });
             },
 
         methods: {
@@ -143,31 +153,7 @@
         display: inline-block;
         margin-left: 5%;
     }
-    .search-form {
-        position: relative;
-        top: 50%;
-        left: 50%;
-        width: 680px;
-        height: 40px;
-        border-radius: 40px;
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        transform: translate(-50%, -50%);
-        background: #fff;
-        transition: all 0.3s ease;
-        margin-bottom:5% ;
 
-    }
-    .header_user{
-        float: right;
-        display: inline-block;
-        margin-right: 5%;
-
-    }
-    .header_logo{
-        float: left;
-        display: inline-block;
-        margin-left: 5%;
-    }
     .menuShow{
         position: absolute;
         width: 120px;

@@ -130,21 +130,13 @@
 
 <style>
     .wrapper{
-        margin-top: 10%;
-        margin-left: 20%;
-        margin-right: 5%;
-        height: 600px;
-        width:840px;
+        margin:5% auto;
+        max-width: 850px;
+
     }
     errors{
         font-color:red;
     }
-    .column_auth {
-             width: 600px;
-             margin-left: 200px;
-             margin-top: 100px;
-
-        }
 
     .form_auth h1 {
             font-family: Sedgwick Ave;
@@ -182,7 +174,6 @@
         border-radius: 50px;
         outline: 0;
         z-index: 2;
-        border: 1px solid rgb(52, 56, 61);
         background: #FFC800;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
         width: 250px;
@@ -257,21 +248,24 @@
         border-bottom: 1px solid;
     }
     .form_auth{
+        margin-left:2%;
         width: 350px;
         height: 375px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-        float:right;
+        float:left;
         margin-bottom: 40px;
     }
     .reg_feed{
+        font-family: Roboto;
+        margin-left:2%;
         width: 350px;
         height: 109px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-        float:right;
+        float:left;
         text-align: center;
     }
     .error{
