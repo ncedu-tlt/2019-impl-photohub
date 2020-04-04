@@ -22,7 +22,6 @@
                       <div class="menu_show" v-if="menu_show">
                           <button  v-on:click="mainPage">Main</button>
                           <button v-on:click="exitMethods">Exit</button>
-                          <button v-on:click="subscribe">Subscribe</button>
                           <button>
                           <div class="upload_photo">
                               Upload
@@ -149,7 +148,6 @@
                             <img src="./../assets/like.png" style=" width:24px; height:24px">
                         </button>{{likes}}
                     </div>
-
                     <div v-for="subscribe in subscribers" :key="subscribe" >
                         {{subscribe}} <button v-on:click="sign">Subscribe</button>
                     </div>
@@ -171,7 +169,7 @@
                     images:[],
                     avatar:"",
                     likes:"",
-                    subscribers:[],
+                    subscribers:"",
                     user: {
                         email: ls.get('photohubUser')
                     },
@@ -190,6 +188,10 @@
                     this.avatar_show=true;
                     this.avatar=response.data.avatar;
                 });
+            axios.get("/api/..="+this.user.email)
+                .then(response=>{
+                    this.subscribers=response.data.subscribers;
+                });
             },
 
 
@@ -203,12 +205,7 @@
                     likes:this.likes++
                 })
             },
-            subscribe:function() {
-                axios.post("")
-                .then(response=>{
-                    this.subscribers=response.subscribe;
-                })
-            },
+
             onFileChange( e) {
                 const files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -314,7 +311,7 @@
     .menu_show{
         position: absolute;
         width: 120px;
-        height: 240px;
+        height: 180px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
@@ -389,6 +386,8 @@
         margin:20px 5% 0% 0%;
         padding: 5px;
         display: inline-block;
+        float: left;
+        margin-left: 5%;
     }
     .sidebar p{
         font-family: "Sedgwick Ave";
@@ -405,14 +404,17 @@
     .post{
         margin-bottom: 35px;
         width:600px;
-        height: 600px;
+        height: 580px;
         border: 3px solid #a3a1a6;
-        display: inline-block;
-        margin-left: 5%;
+        margin-left: 10%;
+        border-radius:30px;
+        padding-left: 5px;
+        text-align: center;
+        padding-top: 5%;
     }
     .container img{
-        width: 580px;
-        height: 540px;
+        width: 550px;
+        height: 500px;
     }
     .post like{
         float:bottom;
