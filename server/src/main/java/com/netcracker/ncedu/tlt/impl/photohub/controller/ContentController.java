@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -23,13 +20,14 @@ public class ContentController {
     private PhotoRepository photoRepository;
     @GetMapping(path = "/get_content")
     @ResponseBody
-    public Object getImagesById(@RequestParam Integer id, String email) throws IOException {
-        List<String> images = new LinkedList<>();
+    public Object getImagesById() throws IOException {
+        List <Object> response = new ArrayList<>();
         for (Photo photo : photoRepository.findAll()) {
-            images.add(photo.getBase64());
+            Map<String,String> object = new HashMap<>();
+            object.put("email",photo.getEmail());
+            object.put("base64",photo.getBase64());
+            response.add(object);
         }
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("images", images);
-        return map;
+        return response;
     }
 }

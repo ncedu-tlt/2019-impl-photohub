@@ -30,9 +30,11 @@
               </form>
                 <div class="postMain" v-for="image in images" :key="image">
                     <div>
-                        {{emailUser}}
+                        <h2>
+                            {{image.email}}
+                        </h2>
                     </div>
-                    <img :src="image"/>
+                    <img :src="image.base64"/>
                     <button v-on:click="like">
                         <img src="./../assets/like.png" style=" width:24px; height:24px">
                     </button>{{likes}}
@@ -66,9 +68,7 @@
             created: function (){
             axios.get("/api/contentfeed/get_content")
                 .then(response=>{
-                    this.images=response.data.images;
-                    this.likes=response.data.likes;
-                    this.emailUser=response.data.email;
+                    this.images=response.data;
                 });
             axios.get("/api/image/get/avatar")
                 .then(response=>{

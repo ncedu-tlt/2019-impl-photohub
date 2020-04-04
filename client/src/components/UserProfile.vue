@@ -185,7 +185,7 @@
                     this.images=response.data.images;
                     this.likes=response.data.likes;
                 });
-            axios.get("/api/image/get/avatar")
+            axios.get("/api/image/get/avatar/get?email="+this.user.email)
                 .then(response=>{
                     this.avatar_show=true;
                     this.avatar=response.data.images;

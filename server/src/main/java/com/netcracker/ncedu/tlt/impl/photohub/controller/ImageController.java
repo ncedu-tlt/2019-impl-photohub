@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class ImageController {
     @Autowired
     private PhotoRepository photoRepository;
+    @Autowired
     private AvatarRepository avatarRepository;
 
     @PostMapping(path = "/upload")
