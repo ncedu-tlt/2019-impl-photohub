@@ -1,10 +1,7 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,6 +15,7 @@ public class Photo {
 
     private Date date;
 
+    @Column(length = Integer.MAX_VALUE)
     private String base64;
 
     private String email;
