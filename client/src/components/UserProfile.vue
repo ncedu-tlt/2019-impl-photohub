@@ -10,7 +10,7 @@
                   {{user.email}}
                   <div class="containerAvatar">
                       <div class="avatar" v-if="avatar_show">
-                          <img v-for="avatars in avatar" :key="avatars" :src="avatars" style="width: 100%"/>
+                          <img :src="avatar" style="width: 100%"/>
                       </div>
                       <div class="avatar" v-else>
                           <img src="./../assets/user.png" height="32" width="32">
@@ -43,7 +43,7 @@
           <div class="sidebar">
               <div class="ico_user">
                   <div class="avatarSide" v-if="avatar_show">
-                      <img v-for="avatars in avatar" :key="avatars" :src="avatars" style="width: 100%"/>
+                      <img :src="avatar" style="width: 100%"/>
                   </div>
                   <div class="avatarSide" v-else>
                       <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
             return {
                     posts:[],
                     images:[],
-                    avatar:[],
+                    avatar:"",
                     likes:"",
                     subscribers:[],
                     user: {
@@ -185,10 +185,10 @@
                     this.images=response.data.images;
                     this.likes=response.data.likes;
                 });
-            axios.get("/api/image/get/avatar/get?email="+this.user.email)
+            axios.get("/api/image/get/avatar?email="+this.user.email)
                 .then(response=>{
                     this.avatar_show=true;
-                    this.avatar=response.data.images;
+                    this.avatar=response.data.avatar;
                 });
             },
 
@@ -274,7 +274,7 @@
                     }).then(response => {
                         if (response.status === 200) {
                             this.avatar_show=true;
-                            this.avatar.push(reader.result)
+                            this.avatar=reader.result;
                         }
                     })
                 });

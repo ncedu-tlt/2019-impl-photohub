@@ -56,14 +56,20 @@ public class ImageController {
 
     @GetMapping(path = "/get/avatar")
     @ResponseBody
-    public Object getImagesByEmailFromAvatar(@RequestParam String email) throws IOException {
-        List<String> images = avatarRepository.findByEmail(email)
+    public Object getImagesByEmailFromAvatar(@RequestParam String email,HttpServletResponse response) throws IOException {
+        String avatar = avatarRepository.findByEmail(email)
                 .stream()
                 .map(Avatar::getBase64)
-                .collect(Collectors.toList());
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("images", images);
-        return map;
+                .findFirst()
+                .orElse("");
+        if (avatar.isEmpty()) {
+            response.sendError(404, "Not found" );
+        }
+
+        Map<String,String> responseBody = new HashMap<>();
+        responseBody.put("avatar", avatar);
+        return responseBody;
+
     }
 
 

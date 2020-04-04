@@ -9,7 +9,7 @@
               <h1>
                   {{user.email}}
                   <div class="avatar" v-if="avatar_show">
-                      <img v-for="avatars in avatar" :key="avatars" :src="avatars" style="width: 100%"/>
+                      <img :src="avatar" style="width: 100%"/>
                   </div>
                   <div class="avatar" v-else>
                       <img src="./../assets/user.png" height="32" width="32">
@@ -54,6 +54,7 @@
         name: "UserProfile",
             data: function () {
             return {
+                    avatar:"",
                     posts:[],
                     images:[],
                     likes:"",
@@ -70,10 +71,10 @@
                 .then(response=>{
                     this.images=response.data;
                 });
-            axios.get("/api/image/get/avatar")
+            axios.get("/api/image/get/avatar?email="+this.user.email)
                 .then(response=>{
                     this.avatar_show=true;
-                    this.avatar=response.data.images;
+                    this.avatar=response.data.avatar;
                 });
             },
 
