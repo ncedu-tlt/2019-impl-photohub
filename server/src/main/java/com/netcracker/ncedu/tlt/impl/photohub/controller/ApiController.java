@@ -11,6 +11,8 @@ import java.io.IOException;
 public class ApiController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SubscribeRepository subscribeRepository;
 
     @PostMapping(path = "/auth")
     public void login(@RequestBody LoginData loginData, HttpServletResponse response) throws IOException {
@@ -26,4 +28,11 @@ public class ApiController {
         else userRepository.save(user);
     }
 
+    @PostMapping(path = "/subscribe")
+    public void addSubscribe(@RequestParam Subscription subscribe, HttpServletResponse response) throws IOException{
+        Subscription sub = new Subscription();
+        sub.setIdSubscriber(subscribe.getIdSubscriber());
+        sub.setSubscribeTo(subscribe.getSubscribeTo());
+        subscribeRepository.save(sub);
+    }
 }
