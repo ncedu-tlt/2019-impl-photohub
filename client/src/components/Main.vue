@@ -89,9 +89,25 @@
                 this.menu_show=!this.menu_show;
             },
             like:function() {
-                axios.post("", {
-                    likes:this.likes++
-                })
+                if(this.likeOn===false) {
+                    this.likeOn = true;
+                    axios.post("/api", {
+                        likes: this.likes++,
+                    }).then(response => {
+                        if(response.status === 200) {
+                            this.likes = this.likes++;
+                        }
+                    });
+                }else {
+                    this.likeOn = false;
+                    axios.post("/api", {
+                        likes: this.likes--,
+                    }).then(response => {
+                        if(response.status === 200) {
+                            this.likes = this.likes--;
+                        }
+                    });
+                }
             },
             mainPage:function () {
                 this.$router.push("/");
