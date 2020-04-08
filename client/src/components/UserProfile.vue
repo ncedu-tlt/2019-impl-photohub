@@ -83,17 +83,6 @@
                         <div class="postContent">
                             <img :src="image"/>
                         </div>
-                        <div class="postFooter">
-                            <button v-on:click="like">
-                                <img src="./../assets/like.png" style=" width:24px; height:24px">
-                            </button>
-                            {{likes}}
-                        </div>
-
-                    </div>
-                    <div v-for="subscribe in subscribers" :key="subscribe">
-                        {{subscribe}}
-                        <button v-on:click="sign">Subscribe</button>
                     </div>
                 </div>
             </div>
@@ -149,56 +138,9 @@
             },
 
 
-
         methods: {
             menu:function(){
                 this.menu_show=!this.menu_show;
-            },
-            like:function() {
-                if(this.likeOn===false) {
-                    this.likeOn = true;
-                    axios.post("/api", {
-                        likes: this.likes++,
-                    }).then(response => {
-                        if(response.status === 200) {
-                            this.likes = this.likes++;
-                        }
-                    });
-                }else {
-                    this.likeOn = false;
-                    axios.post("/api", {
-                        likes: this.likes--,
-                    }).then(response => {
-                        if(response.status === 200) {
-                            this.likes = this.likes--;
-                        }
-                    });
-                }
-            },
-            onFileChange( e) {
-                const files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
-                    return;
-                this.createImage(files[0]);
-            },
-            createImage(file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    console.log(e.target.result);
-                };
-                reader.readAsDataURL(file);
-
-
-            },
-            sign:function() {
-                axios.post("",{
-                    email: this.user.email
-                })
-                    .then(response=>{
-                        if (response.status === 200) {
-                            alert('Success')
-                        }
-                    })
             },
             mainPage:function(){
                 this.$router.push("/main");

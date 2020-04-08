@@ -45,7 +45,7 @@
                     <div class="postFooter">
                         <button v-on:click="like">
                             <img src="./../assets/like.png" style=" width:24px; height:24px">
-                        </button>{{likes}}
+                        </button>{{image.likes}}
                     </div>
                 </div>
           </div>
@@ -62,7 +62,6 @@
                     avatar:"",
                     posts:[],
                     images:[],
-                    likes:"",
                     subscription:"",
                     user: {
                         email: ls.get('photohubUser')
@@ -92,19 +91,21 @@
                 if(this.likeOn===false) {
                     this.likeOn = true;
                     axios.post("/api", {
-                        likes: this.likes++,
+                        images: image.likes++,
+                        likeOn:true,
                     }).then(response => {
                         if(response.status === 200) {
-                            this.likes = this.likes++;
+                            image.likes = image.likes++;
                         }
                     });
                 }else {
                     this.likeOn = false;
                     axios.post("/api", {
-                        likes: this.likes--,
+                        images: image.likes--,
+                        likeOn:false,
                     }).then(response => {
                         if(response.status === 200) {
-                            this.likes = this.likes--;
+                            image.likes = image.likes--;
                         }
                     });
                 }
