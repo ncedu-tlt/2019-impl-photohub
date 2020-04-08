@@ -20,6 +20,7 @@ public class Photo {
 
     private String email;
 
+    private Integer likes;
 
     public Integer getId() {
         return id;
@@ -61,5 +62,11 @@ public class Photo {
         this.email = email;
     }
 
+    public Integer getLikes() {
+        return likes;
+    }
 
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
 }

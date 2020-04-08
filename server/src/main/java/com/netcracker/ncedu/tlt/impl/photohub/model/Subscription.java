@@ -9,34 +9,19 @@ public class Subscription {
     @Id
     private Integer Id;
 
-    private Integer idSubscriber;
+    private String emailSubscriber;
 
     private String name;
 
-    private Integer subscribeTo;
+    private String subscribeTo;
 
-    public Integer getId() {
-        return Id;
+
+    public String getEmailSubscriber() {
+        return emailSubscriber;
     }
 
-    public void setId(Integer id) {
-        Id = id;
-    }
-
-    public Integer getIdSubscriber() {
-        return idSubscriber;
-    }
-
-    public void setIdSubscriber(Integer idSubscriber) {
-        this.idSubscriber = idSubscriber;
-    }
-
-    public Integer getSubscribeTo() {
-        return subscribeTo;
-    }
-
-    public void setSubscribeTo(Integer subscribeTo) {
-        this.subscribeTo = subscribeTo;
+    public void setEmailSubscriber(String emailSubscriber) {
+        this.emailSubscriber = emailSubscriber;
     }
 
     public String getName() {
@@ -45,5 +30,13 @@ public class Subscription {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSubscribeTo() {
+        return subscribeTo;
+    }
+
+    public void setSubscribeTo(String subscribeTo) {
+        this.subscribeTo = subscribeTo;
     }
 }

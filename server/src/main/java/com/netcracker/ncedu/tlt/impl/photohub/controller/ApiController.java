@@ -34,22 +34,22 @@ public class ApiController {
     }
 
     @PostMapping(path = "/subscribe")
-    public void addSubscribe(@RequestParam Subscription subscribe, HttpServletResponse response) throws IOException{
+    public void addSubscribe(@RequestParam Subscription subscribe) throws IOException{
         Subscription sub = new Subscription();
-        sub.setIdSubscriber(subscribe.getIdSubscriber());
+        sub.setEmailSubscriber(subscribe.getEmailSubscriber());
         sub.setSubscribeTo(subscribe.getSubscribeTo());
         subscribeRepository.save(sub);
     }
 
     @GetMapping(path = "/get/subscribe")
     @ResponseBody
-    public Object getSubscribe(@RequestParam String name) throws IOException {
-        List<String> subs = subscribeRepository.findByIdSubscriberAndName(name)
+    public Object getSubscribe(@RequestParam String name, String email) throws IOException {
+        List<String> subs = subscribeRepository.findByEmailSubscriberAndName(email, name)
                 .stream()
                 .map(Subscription::getName)
                 .collect(Collectors.toList());
         Map<String, List<String>> map = new HashMap<>();
-        map.put("subscribers", Collections.singletonList(name));
+        map.put("subscribers", subs);
         return map;
     }
 }
