@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SubscribeRepository extends CrudRepository<Subscription, Integer> {
     boolean deleteByIdSubscriberAndSubscribeTo(Integer idSubscriber, Integer subscribeTo );
-    List<Subscription> findByIdSubscriber(Integer idSubscriber);
+    List<Subscription> findByIdSubscriberAndName(String name);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,13 +42,14 @@ public class ApiController {
     }
 
     @GetMapping(path = "/get/subscribe")
-    public Map<String, Integer> getSubscribe(@RequestParam Integer idSubscriber) throws IOException {
-        List<Integer> subs = subscribeRepository.findByIdSubscriber(idSubscriber)
+    @ResponseBody
+    public Object getSubscribe(@RequestParam String name) throws IOException {
+        List<String> subs = subscribeRepository.findByIdSubscriberAndName(name)
                 .stream()
-                .map(Subscription::getIdSubscriber)
+                .map(Subscription::getName)
                 .collect(Collectors.toList());
-        Map<String, Integer> map = new HashMap<>();
-        map.put("subscribers", idSubscriber);
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("subscribers", Collections.singletonList(name));
         return map;
     }
 }
