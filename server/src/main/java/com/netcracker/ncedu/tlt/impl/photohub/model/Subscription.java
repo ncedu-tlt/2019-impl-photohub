@@ -1,6 +1,13 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Subscription {
+
+    @Id
+    private Integer Id;
 
     private Integer idSubscriber;
 

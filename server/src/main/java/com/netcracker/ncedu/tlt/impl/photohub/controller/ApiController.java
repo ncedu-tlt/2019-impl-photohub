@@ -5,6 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/api/user")
@@ -34,5 +38,16 @@ public class ApiController {
         sub.setIdSubscriber(subscribe.getIdSubscriber());
         sub.setSubscribeTo(subscribe.getSubscribeTo());
         subscribeRepository.save(sub);
+    }
+
+    @GetMapping(path = "/get/subscribe")
+    public Map<String, Integer> getSubscribe(@RequestParam Integer idSubscriber) throws IOException {
+        List<Integer> subs = subscribeRepository.findByIdSubscriber(idSubscriber)
+                .stream()
+                .map(Subscription::getIdSubscriber)
+                .collect(Collectors.toList());
+        Map<String, Integer> map = new HashMap<>();
+        map.put("subscribers", idSubscriber);
+        return map;
     }
 }
