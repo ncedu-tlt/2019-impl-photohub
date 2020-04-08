@@ -1,4 +1,6 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 
-public interface LikeRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface LikeRepository  extends CrudRepository<Subscription, String> {
 }
