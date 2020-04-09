@@ -87,10 +87,11 @@
             menu:function(){
                 this.menu_show=!this.menu_show;
             },
-            like:function() {
+            like:function(image) {
                 if(this.likeOn===false) {
                     this.likeOn = true;
                     axios.post("/api", {
+                        Id:image.id,
                         images: image.likes++,
                         likeOn:true,
                     }).then(response => {
@@ -101,6 +102,7 @@
                 }else {
                     this.likeOn = false;
                     axios.post("/api", {
+                        Id:image.id,
                         images: image.likes--,
                         likeOn:false,
                     }).then(response => {
