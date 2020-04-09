@@ -95,7 +95,5 @@ public class ImageController {
         photoRepository.save(likedPhoto);
             return false;
         }
-
     }
-
 }
