@@ -27,16 +27,13 @@ public class ContentController {
     public Object getImagesById() throws IOException {
         List <Object> response = new ArrayList<>();
         for (Photo photo : photoRepository.findAll()) {
-            for (Likes likes : likeRepository.findAll()) {
                 Map<String, Object> object = new HashMap<>();
                 object.put("id", photo.getId());
                 object.put("email", photo.getEmail());
                 object.put("base64", photo.getBase64());
                 object.put("likes", photo.getLikes());
-                object.put("likes", likes.getIid());
                 response.add(object);
             }
-        }
         return response;
     }
 }

@@ -2,28 +2,30 @@ package com.netcracker.ncedu.tlt.impl.photohub.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
+@IdClass(LikesId.class)
 public class Likes {
 
     @Id
-    private Integer iid;
+    private Integer userId;
+    @Id
+    private Integer photoId;
 
-    private String email;
-
-    public String getEmail() {
-        return email;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getIid() {
-        return iid;
+    public Integer getPhotoId() {
+        return photoId;
     }
 
-    public void setIid(Integer iid) {
-        this.iid = iid;
+    public void setPhotoId(Integer photoId) {
+        this.photoId = photoId;
     }
 }

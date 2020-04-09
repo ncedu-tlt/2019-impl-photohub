@@ -1,6 +1,4 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +19,7 @@ public class Photo {
 
     private String email;
 
-    private Integer likes;
+    private Long likes;
 
     public Integer getId() {
         return id;
@@ -63,11 +61,11 @@ public class Photo {
         this.email = email;
     }
 
-    public Integer getLikes() {
+    public Long getLikes() {
         return likes;
     }
 
-    public void setLikes(Integer likes) {
+    public void setLikes(Long likes) {
         this.likes = likes;
     }
 }
