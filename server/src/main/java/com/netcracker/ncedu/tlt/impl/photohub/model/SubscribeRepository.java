@@ -2,7 +2,6 @@ package com.netcracker.ncedu.tlt.impl.photohub.model;
 
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Arrays;
 import java.util.List;
 
 

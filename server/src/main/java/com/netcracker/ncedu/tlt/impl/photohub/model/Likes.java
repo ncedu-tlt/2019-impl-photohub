@@ -9,27 +9,7 @@ public class Likes {
     @Id
     private Integer iid;
 
-    private Integer id;
-
-    private Boolean liked = false;
-
     private String email;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Boolean getLiked() {
-        return liked;
-    }
-
-    public void setLiked(Boolean like) {
-        this.liked = liked;
-    }
 
     public String getEmail() {
         return email;

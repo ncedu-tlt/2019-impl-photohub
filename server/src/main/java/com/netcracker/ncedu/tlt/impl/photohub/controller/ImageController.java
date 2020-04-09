@@ -74,16 +74,23 @@ public class ImageController {
     }
 
     @PostMapping(path = "/like")
-    public Object addLike(@RequestBody Likes like) throws IOException {
-        if(!likeRepository.existsByEmailAndIdAndLiked(like.getEmail(), like.getId(), like.getLiked())) {
+    public Object addLike(@RequestParam Likes like) throws IOException {
+        if (!likeRepository.existsByEmailAndIid(like.getEmail(), like.getIid())) {
             Likes likes = new Likes();
             likes.setEmail(like.getEmail());
-            likes.setId(like.getId());
-            likes.setLiked(like.getLiked());
+            likes.setIid(like.getIid());
             likeRepository.save(likes);
             return true;
+        } else { likeRepository.deleteLikesByEmailAndIid(like.getEmail(), like.getIid());
+            return false;
         }
-    else return false;
     }
 
+    @PostMapping(path = "/countlike")
+    public long countLike(@RequestParam Photo count) throws  IOException {
+        Photo countLike = new Photo();
+        countLike.setLikes(count.getLikes());
+        photoRepository.save(countLike);
+        return photoRepository.countById(countLike.getId());
+    }
 }
