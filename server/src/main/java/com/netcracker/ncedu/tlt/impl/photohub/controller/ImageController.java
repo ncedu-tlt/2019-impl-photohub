@@ -48,7 +48,6 @@ public class ImageController {
         if(avatarRepository.existsByEmailAndBase64(profile.getEmail(), profile.getBase64())) {
             response.sendError(409, "Такое изображение уже загружено" );
         }
-
         else { Avatar avatar =  new Avatar();
             avatar.setEmail(profile.getEmail());
             avatar.setBase64(profile.getBase64());
