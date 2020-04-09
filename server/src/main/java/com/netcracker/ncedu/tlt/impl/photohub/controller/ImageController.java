@@ -98,11 +98,4 @@ public class ImageController {
 
     }
 
-    @PostMapping(path = "/countlike")
-    public long countLike(@RequestParam Photo count) throws  IOException {
-        Photo countLike = new Photo();
-        countLike.setLikes(count.getLikes());
-        photoRepository.save(countLike);
-        return photoRepository.countById(countLike.getId());
-    }
 }

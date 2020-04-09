@@ -7,7 +7,9 @@ public class LikesId implements Serializable {
     private Integer userId;
     private Integer photoId;
 
+
     public LikesId() {}
+
 
     public LikesId(Integer userId, Integer photoId) {
         this.userId = userId;
