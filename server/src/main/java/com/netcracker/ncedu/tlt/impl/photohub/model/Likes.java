@@ -1,12 +1,17 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
+@Entity
 public class Likes {
+
+    @Id
+    private Integer iid;
 
     private Integer id;
 
-    private Boolean like;
+    private Boolean liked = false;
 
     private String email;
 
@@ -18,12 +23,12 @@ public class Likes {
         this.id = id;
     }
 
-    public Boolean getLike() {
-        return like;
+    public Boolean getLiked() {
+        return liked;
     }
 
-    public void setLike(Boolean like) {
-        this.like = like;
+    public void setLiked(Boolean like) {
+        this.liked = liked;
     }
 
     public String getEmail() {
@@ -32,5 +37,13 @@ public class Likes {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getIid() {
+        return iid;
+    }
+
+    public void setIid(Integer iid) {
+        this.iid = iid;
     }
 }

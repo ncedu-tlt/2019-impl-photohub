@@ -1,4 +1,5 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;

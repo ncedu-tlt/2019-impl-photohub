@@ -1,5 +1,7 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
 
+import com.netcracker.ncedu.tlt.impl.photohub.model.LikeRepository;
+import com.netcracker.ncedu.tlt.impl.photohub.model.Likes;
 import com.netcracker.ncedu.tlt.impl.photohub.model.Photo;
 import com.netcracker.ncedu.tlt.impl.photohub.model.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,22 @@ import java.util.*;
 public class ContentController {
     @Autowired
     private PhotoRepository photoRepository;
+    @Autowired
+    LikeRepository likeRepository;
     @GetMapping(path = "/get_content")
     @ResponseBody
     public Object getImagesById() throws IOException {
         List <Object> response = new ArrayList<>();
         for (Photo photo : photoRepository.findAll()) {
-            Map<String,String> object = new HashMap<>();
-            object.put("email",photo.getEmail());
-            object.put("base64",photo.getBase64());
-            response.add(object);
+            for (Likes likes : likeRepository.findAll()) {
+                Map<String, Object> object = new HashMap<>();
+                object.put("id", photo.getId());
+                object.put("email", photo.getEmail());
+                object.put("base64", photo.getBase64());
+                object.put("likes", photo.getLikes());
+                object.put("Liked", likes.getLiked());
+                response.add(object);
+            }
         }
         return response;
     }

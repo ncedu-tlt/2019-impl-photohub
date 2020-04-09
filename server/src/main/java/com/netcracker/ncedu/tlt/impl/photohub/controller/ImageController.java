@@ -15,6 +15,8 @@ public class ImageController {
     private PhotoRepository photoRepository;
     @Autowired
     private AvatarRepository avatarRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
     @PostMapping(path = "/upload")
     public void addImage(@RequestBody UploadData uploadData, HttpServletResponse response) throws IOException {
@@ -72,5 +74,17 @@ public class ImageController {
 
     }
 
+    @PostMapping(path = "/like")
+    public Object addLike(@RequestBody Likes like) throws IOException {
+        if(!likeRepository.existsByEmailAndIdAndLiked(like.getEmail(), like.getId(), like.getLiked())) {
+            Likes likes = new Likes();
+            likes.setEmail(like.getEmail());
+            likes.setId(like.getId());
+            likes.setLiked(like.getLiked());
+            likeRepository.save(likes);
+            return true;
+        }
+    else return false;
+    }
 
 }
