@@ -81,7 +81,7 @@ public class ImageController {
             likes.setIid(like.getIid());
             likeRepository.save(likes);
             return true;
-        } else { likeRepository.deleteLikesByEmailAndIid(like.getEmail(), like.getIid());
+        } else { likeRepository.deleteByEmailAndIid(like.getEmail(), like.getIid());
             return false;
         }
     }
