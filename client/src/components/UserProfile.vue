@@ -128,7 +128,7 @@
             axios.get("/api/user/get/subscribe?email="+this.user.email)
                 .then(response=>{
                     this.sub_show=true;
-                    this.name=response.subscribers.name;
+                    this.name=response.subscribers;
                 });
             axios.get("/api/.."+this.user.email)
                 .then(response=>{
