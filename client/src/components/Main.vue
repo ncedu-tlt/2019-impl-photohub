@@ -43,7 +43,7 @@
                         <img :src="image.base64"/>
                     </div>
                     <div class="postFooter">
-                        <button v-on:click="like">
+                        <button v-on:click="like" value="image">
                             <img src="./../assets/like.png" style=" width:24px; height:24px">
                         </button>{{image.likes}}
                     </div>
