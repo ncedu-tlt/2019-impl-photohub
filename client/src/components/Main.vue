@@ -8,14 +8,19 @@
           <div class="header_user">
               <h1>
                   {{user.email}}
-                  <img src="./../assets/user.png" height="32" width="37">
+                  <div class="avatar" v-if="avatar_show">
+                      <img :src="avatar" style="width: 100%"/>
+                  </div>
+                  <div class="avatar" v-else>
+                      <img src="./../assets/user.png" height="32" width="32">
+                  </div>
                   <button class="menu" v-on:click="menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                      <div class="menuShow" v-if="menu_show">
-                          <button  v-on:click="mainPage">Profile</button>
-                      </div>
                   </button>
+                  <div class="menuShow" v-if="menu_show">
+                      <button  v-on:click="mainPage">Profile</button>
+                  </div>
               </h1>
           </div>
       </div>
@@ -24,10 +29,20 @@
                   <input type="search" value="" placeholder="Search" class="search-input">
               </form>
                 <div class="postMain" v-for="image in images" :key="image">
-                    <img :src="image"/>
-                    <button v-on:click="like">
-                        <img src="./../assets/like.png" style=" width:24px; height:24px">
-                    </button>{{likes}}
+                    <div class="postHeader">
+                        <h2>
+                            {{image.email}}
+                        </h2>
+                        <button :key="image" v-on:click="subscribe">Subscribe</button>
+                    </div>
+                    <div class="postContent">
+                        <img :src="image.base64"/>
+                    </div>
+                    <div class="postFooter">
+                        <button v-on:click="like">
+                            <img src="./../assets/like.png" style=" width:24px; height:24px">
+                        </button>{{likes}}
+                    </div>
                 </div>
 
                 <div v-for="subscribe in subscribers" :key="subscribe" >
@@ -44,22 +59,29 @@
         name: "UserProfile",
             data: function () {
             return {
+                    avatar:"",
                     posts:[],
                     images:[],
                     likes:"",
-                    subscribers:[],
+                    subscription:"",
                     user: {
                         email: ls.get('photohubUser')
                     },
+                    emailUser:'',
                     menu_show:false,
+                    myEmail:"",
                 }
             },
             created: function (){
-            axios.get("/api/image/get?email=" + this.user.email)
+            axios.get("/api/contentfeed/get_content")
                 .then(response=>{
-                    this.images=response.data.images;
-                    this.likes=response.data.likes;
-                })
+                    this.images=response.data;
+                });
+            axios.get("/api/image/get/avatar?email="+this.user.email)
+                .then(response=>{
+                    this.avatar_show=true;
+                    this.avatar=response.data.avatar;
+                });
             },
 
         methods: {
@@ -73,6 +95,19 @@
             },
             mainPage:function () {
                 this.$router.push("/");
+            },
+            subscribe:function () {
+                axios.post("/api/subscribe", {
+                    email: this.user.email,
+                    subscription: this.image.email,
+                }).then(response => {
+                    if (response.status === 200) {
+                        ls.set("photohubUser", this.email);
+                        this.$router.push("/");
+                    } else if (response.status === 404) {
+                        this.$notify({ group: 'foo', text: 'User not found, please try again' })
+                    }
+                })
             }
         }
         };
@@ -81,6 +116,7 @@
 </script>
 
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500&display=swap");
     .header_user button{
         outline: none;
@@ -120,14 +156,57 @@
     .postMain{
         margin-bottom: 35px;
         width:600px;
-        height: 500px;
+        height: 650px;
         border: 3px solid #a3a1a6;
-        display: inline-block;
-        margin-left: 1%;
+        margin-left: 10%;
+        border-radius:30px;
+        padding-left: 5px;
     }
+    .postHeader{
+        display: flex;
+        margin-left: inherit;
+        font-family: "Sedgwick Ave";
+    }
+    .postHeader button{
+        color: #000000;
+        text-shadow: 0 0 1px rgb(1,1,1);
+        cursor: pointer;
+        position: relative;
+        border-radius: 50px;
+        outline: 0;
+        z-index: 2;
+        background: #FFC800;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        width: 85px;
+        height: 30px;
+        padding: 5px;
+        display: inline-block;
+        margin:auto;
+    }
+    .postContent{
+        text-align: center;
+    }
+    .postContent img{
+        width: 550px;
+        height: 500px;
+    }
+    .postFooter button{
+        color: #000000;
+        text-shadow: 0 0 1px rgb(1,1,1);
+        cursor: pointer;
+        position: relative;
+        border-radius: 100px;
+        outline: 0;
+        z-index: 2;
+        background: #FFC800;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        padding: 5px;
+        display: inline-block;
+    }
+
     .contentMain img{
         width: 500px;
-        height: 450px;
+        height: 500px;
     }
     .contentMain like{
         float:bottom;
@@ -138,31 +217,7 @@
         display: inline-block;
         margin-left: 5%;
     }
-    .search-form {
-        position: relative;
-        top: 50%;
-        left: 50%;
-        width: 680px;
-        height: 40px;
-        border-radius: 40px;
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        transform: translate(-50%, -50%);
-        background: #fff;
-        transition: all 0.3s ease;
-        margin-bottom:5% ;
 
-    }
-    .header_user{
-        float: right;
-        display: inline-block;
-        margin-right: 5%;
-
-    }
-    .header_logo{
-        float: left;
-        display: inline-block;
-        margin-left: 5%;
-    }
     .menuShow{
         position: absolute;
         width: 120px;

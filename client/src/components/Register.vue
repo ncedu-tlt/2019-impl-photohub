@@ -114,19 +114,13 @@
 </script>
 
 <style>
-    .wrapper{
-        margin-top: 10%;
-        margin-left: 20%;
-        margin-right: 5%;
-        height: 400px;
-        width:840px;
-    }
+
     .form_reg h1 {
         font-family: Sedgwick Ave;
         align-items: center;
         text-align: center;
         color: #FFC800;
-        font-size: 35px;
+        font-size: 45px;
         margin-top: 30px;
     }
 
@@ -147,7 +141,6 @@
         border-radius: 50px;
         outline: 0;
         z-index: 2;
-        border: 1px solid rgb(52, 56, 61);
         background: #FFC800;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
         width: 250px;
@@ -165,7 +158,7 @@
         border-radius: 10px;
         width: 250px;
         height: 35px;
-        margin: 5% 10% 0% 0%;
+        margin: 5% 0% 0% 0%;
         padding: 10px;
         display: inline-block;
 
@@ -190,7 +183,7 @@
     }
     .form_reg{
         width: 450px;
-        height: 500px;
+        height: 480px;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
@@ -200,6 +193,7 @@
         text-align: center;
     }
     .tick{
+        margin-left: 4%;
         display: inline-block;
     }
 

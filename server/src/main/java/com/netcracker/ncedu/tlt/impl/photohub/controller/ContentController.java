@@ -1,5 +1,7 @@
 package com.netcracker.ncedu.tlt.impl.photohub.controller;
 
+import com.netcracker.ncedu.tlt.impl.photohub.model.LikeRepository;
+import com.netcracker.ncedu.tlt.impl.photohub.model.Likes;
 import com.netcracker.ncedu.tlt.impl.photohub.model.Photo;
 import com.netcracker.ncedu.tlt.impl.photohub.model.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -21,15 +20,20 @@ import java.util.Map;
 public class ContentController {
     @Autowired
     private PhotoRepository photoRepository;
+    @Autowired
+    LikeRepository likeRepository;
     @GetMapping(path = "/get_content")
     @ResponseBody
-    public Object getImagesById(@RequestParam Integer id, String email) throws IOException {
-        List<String> images = new LinkedList<>();
+    public Object getImagesById() throws IOException {
+        List <Object> response = new ArrayList<>();
         for (Photo photo : photoRepository.findAll()) {
-            images.add(photo.getBase64());
-        }
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("images", images);
-        return map;
+                Map<String, Object> object = new HashMap<>();
+                object.put("id", photo.getId());
+                object.put("email", photo.getEmail());
+                object.put("base64", photo.getBase64());
+                object.put("likes", photo.getLikes());
+                response.add(object);
+            }
+        return response;
     }
 }
