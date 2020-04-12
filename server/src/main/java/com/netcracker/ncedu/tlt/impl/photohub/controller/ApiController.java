@@ -5,12 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/api/user")
 public class ApiController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SubscribeRepository subscribeRepository;
 
     @PostMapping(path = "/auth")
     public void login(@RequestBody LoginData loginData, HttpServletResponse response) throws IOException {
@@ -26,4 +32,23 @@ public class ApiController {
         else userRepository.save(user);
     }
 
+    @PostMapping(path = "/subscribe")
+    public void addSubscribe(@RequestParam Subscription subscribe) throws IOException{
+        Subscription sub = new Subscription();
+        sub.setEmailSubscriber(subscribe.getEmailSubscriber());
+        sub.setSubscribeTo(subscribe.getSubscribeTo());
+        subscribeRepository.save(sub);
+    }
+
+    @GetMapping(path = "/get/subscribe")
+    @ResponseBody
+    public Object getSubscribe(@RequestParam String name, String email) throws IOException {
+        List<String> subs = subscribeRepository.findByEmailSubscriberAndName(email, name)
+                .stream()
+                .map(Subscription::getName)
+                .collect(Collectors.toList());
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("subscribers", subs);
+        return map;
+    }
 }

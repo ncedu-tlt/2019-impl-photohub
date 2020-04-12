@@ -15,6 +15,8 @@ public class ImageController {
     private PhotoRepository photoRepository;
     @Autowired
     private AvatarRepository avatarRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
     @PostMapping(path = "/upload")
     public void addImage(@RequestBody UploadData uploadData, HttpServletResponse response) throws IOException {
@@ -22,7 +24,8 @@ public class ImageController {
             response.sendError(409, "Такое изображение уже загружено" );
         }
 
-        else { Photo photo =  new Photo();
+        else
+            { Photo photo =  new Photo();
         photo.setEmail(uploadData.getEmail());
         photo.setBase64(uploadData.getBase64());
             photoRepository.save(photo);
@@ -46,8 +49,8 @@ public class ImageController {
         if(avatarRepository.existsByEmailAndBase64(profile.getEmail(), profile.getBase64())) {
             response.sendError(409, "Такое изображение уже загружено" );
         }
-
-        else { Avatar avatar =  new Avatar();
+        else
+            { Avatar avatar =  new Avatar();
             avatar.setEmail(profile.getEmail());
             avatar.setBase64(profile.getBase64());
             avatarRepository.save(avatar);
@@ -72,5 +75,25 @@ public class ImageController {
 
     }
 
-
+    @PostMapping(path = "/like")
+    public Object addLike(@RequestParam("userId") Integer userId,
+                          @RequestParam("photoId") Integer photoId)  {
+        if (!likeRepository.existsByUserIdAndPhotoId(userId,photoId)) {
+            Likes likes = new Likes();
+            likes.setUserId(userId);
+            likes.setPhotoId(photoId);
+            likeRepository.save(likes);
+            Photo likedPhoto = photoRepository.findById(photoId).get();
+            likedPhoto.setLikes(likeRepository.countByPhotoId(photoId));
+            photoRepository.save(likedPhoto);
+            return true;
+        }
+        else
+        { likeRepository.deleteByUserIdAndPhotoId(userId, photoId);
+        Photo likedPhoto = photoRepository.findById(photoId).get();
+        likedPhoto.setLikes(likeRepository.countByPhotoId(photoId));
+        photoRepository.save(likedPhoto);
+            return false;
+        }
+    }
 }

@@ -1,5 +1,4 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,6 +18,8 @@ public class Photo {
     private String base64;
 
     private String email;
+
+    private Long likes;
 
     public Integer getId() {
         return id;
@@ -60,5 +61,11 @@ public class Photo {
         this.email = email;
     }
 
+    public Long getLikes() {
+        return likes;
+    }
 
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
 }
