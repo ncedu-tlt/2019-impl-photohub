@@ -90,24 +90,26 @@
             like:function(image) {
                 if(this.likeOn===false) {
                     this.likeOn = true;
-                    axios.post("/api", {
-                        Id:image.id,
-                        images: image.likes++,
+                    axios.post("/api/image/like", {
+                        email:image.email,
+                        photoId:image.id,
+                        images: image.likes--,
                         likeOn:true,
                     }).then(response => {
                         if(response.status === 200) {
-                            image.likes = image.likes++;
+                            image.likes = image.likes--;
                         }
                     });
                 }else {
                     this.likeOn = false;
-                    axios.post("/api", {
-                        Id:image.id,
-                        images: image.likes--,
+                    axios.post("/api/image/like", {
+                        email:image.email,
+                        photoId:image.id,
+                        images: image.likes++,
                         likeOn:false,
                     }).then(response => {
                         if(response.status === 200) {
-                            image.likes = image.likes--;
+                            image.likes = image.likes++;
                         }
                     });
                 }

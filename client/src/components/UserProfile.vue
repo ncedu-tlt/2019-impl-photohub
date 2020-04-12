@@ -130,11 +130,6 @@
                     this.sub_show=true;
                     this.name=response.subscribers;
                 });
-            axios.get("/api/.."+this.user.email)
-                .then(response=>{
-                    this.archive_show=true;
-                    this.archive=response.data.archive
-                })
             },
 
 
