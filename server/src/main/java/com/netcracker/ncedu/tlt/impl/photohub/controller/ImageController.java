@@ -76,11 +76,11 @@ public class ImageController {
     }
 
     @PostMapping(path = "/like")
-    public Object addLike(@RequestParam("userId") Integer userId,
+    public Object addLike(@RequestParam("userEmail") String userEmail,
                           @RequestParam("photoId") Integer photoId)  {
-        if (!likeRepository.existsByUserIdAndPhotoId(userId,photoId)) {
+        if (!likeRepository.existsByUserEmailAndPhotoId(userEmail,photoId)) {
             Likes likes = new Likes();
-            likes.setUserId(userId);
+            likes.setUserEmail(userEmail);
             likes.setPhotoId(photoId);
             likeRepository.save(likes);
             Photo likedPhoto = photoRepository.findById(photoId).get();
@@ -89,7 +89,7 @@ public class ImageController {
             return true;
         }
         else
-        { likeRepository.deleteByUserIdAndPhotoId(userId, photoId);
+        { likeRepository.deleteByUserEmailAndPhotoId(userEmail, photoId);
         Photo likedPhoto = photoRepository.findById(photoId).get();
         likedPhoto.setLikes(likeRepository.countByPhotoId(photoId));
         photoRepository.save(likedPhoto);
