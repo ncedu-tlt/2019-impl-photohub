@@ -91,7 +91,7 @@
                 if(this.likeOn===false) {
                     this.likeOn = true;
                     axios.post("/api/image/like", {
-                        email:image.email,
+                        userEmail:this.user.email,
                         photoId:image.id,
                         images: image.likes--,
                         likeOn:true,
@@ -103,7 +103,7 @@
                 }else {
                     this.likeOn = false;
                     axios.post("/api/image/like", {
-                        email:image.email,
+                        userEmail:this.user.email,
                         photoId:image.id,
                         images: image.likes++,
                         likeOn:false,
