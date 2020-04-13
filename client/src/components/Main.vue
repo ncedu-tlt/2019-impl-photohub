@@ -37,7 +37,7 @@
                         <h2>
                             {{image.email}}
                         </h2>
-                        <button v-on:click="subscribe">Subscribe</button>
+                        <button v-on:click="subscribe(image)">Subscribe</button>
                     </div>
                     <div class="postContent">
                         <img :src="image.base64"/>
@@ -93,8 +93,6 @@
                     axios.post("/api/image/like", {
                         userEmail:this.user.email,
                         photoId:image.id,
-                        images: image.likes--,
-                        likeOn:true,
                     }).then(response => {
                         if(response.status === 200) {
                             image.likes = image.likes--;
@@ -105,8 +103,6 @@
                     axios.post("/api/image/like", {
                         userEmail:this.user.email,
                         photoId:image.id,
-                        images: image.likes++,
-                        likeOn:false,
                     }).then(response => {
                         if(response.status === 200) {
                             image.likes = image.likes++;
@@ -117,10 +113,10 @@
             mainPage:function () {
                 this.$router.push("/");
             },
-            subscribe:function () {
+            subscribe:function (image) {
                 axios.post("/api/user/subscribe", {
-                    Subscriber: this.user.email,
-                    SubscribeTo: this.image.email,
+                    EmailSubscriber: this.user.email,
+                    SubscribeTo: image.email,
                 })
             }
         }

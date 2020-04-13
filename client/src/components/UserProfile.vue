@@ -127,8 +127,10 @@
                 });
             axios.get("/api/user/get/subscribe?email="+this.user.email)
                 .then(response=>{
-                    this.sub_show=true;
-                    this.name=response.subscribers;
+                    if(response.subscribers){
+                        this.sub_show=true;
+                        this.name=response.subscribers;
+                    }
                 });
             },
 
