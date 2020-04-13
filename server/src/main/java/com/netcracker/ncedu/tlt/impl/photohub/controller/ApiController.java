@@ -42,10 +42,10 @@ public class ApiController {
 
     @GetMapping(path = "/get/subscribe")
     @ResponseBody
-    public Object getSubscribe(@RequestParam String name, String email) throws IOException {
-        List<String> subs = subscribeRepository.findByEmailSubscriberAndName(email, name)
+    public Object getSubscribe(@RequestParam String email) throws IOException {
+        List<String> subs = subscribeRepository.findByEmailSubscriber(email)
                 .stream()
-                .map(Subscription::getName)
+                .map(Subscription::getEmailSubscriber)
                 .collect(Collectors.toList());
         Map<String, List<String>> map = new HashMap<>();
         map.put("subscribers", subs);
