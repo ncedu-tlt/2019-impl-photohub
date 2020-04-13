@@ -1,27 +1,31 @@
 <template>
-     <div class="profile">
-      <div class="headerMain">
-          <div class="header_logo">
-              <h1><img src="./../assets/Camera.png" height="32" width="37">
-                  PHOTOHUB</h1>
-          </div>
-          <div class="header_user">
-              <h1>
-                  {{user.email}}
-                  <div class="avatar" v-if="avatar_show">
-                      <img :src="avatar" style="width: 100%"/>
-                  </div>
-                  <div class="avatar" v-else>
-                      <img src="./../assets/user.png" height="32" width="32">
-                  </div>
-                  <button class="menu" v-on:click="menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  </button>
-                  <div class="menuShow" v-if="menu_show">
+    <div class="profile">
+        <div class="header">
+            <div class="header-wrapper">
+                <div class="header_logo">
+                    <img src="./../assets/Camera.png" height="32" width="37">
+                    <span class="header_logo-text">PHOTOHUB</span>
+                </div>
+                <div class="header_user">
+                    <span class="header_user-text">{{user.email}}</span>
+                    <div class="containerAvatar">
+                        <div class="avatar" v-if="avatar_show">
+                            <img :src="avatar" style="width: 100%"/>
+                        </div>
+                        <div class="avatar" v-else>
+                            <img src="./../assets/user.png" height="32" width="32">
+                        </div>
+                    </div>
+                    <div class="menu" v-on:click="menu($event)">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.25 6.75L9 12L3.75 6.75" stroke="#262F56" stroke-width="1.8"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                  <div class="menuShow" v-if="menu_show" style="top: 125%">
                       <button  v-on:click="mainPage">Profile</button>
                   </div>
-              </h1>
+                </div>
           </div>
       </div>
           <div class="contentMain">
@@ -33,20 +37,16 @@
                         <h2>
                             {{image.email}}
                         </h2>
-                        <button :key="image" v-on:click="subscribe">Subscribe</button>
+                        <button v-on:click="subscribe">Subscribe</button>
                     </div>
                     <div class="postContent">
                         <img :src="image.base64"/>
                     </div>
                     <div class="postFooter">
-                        <button v-on:click="like">
+                        <button v-on:click="like(image)">
                             <img src="./../assets/like.png" style=" width:24px; height:24px">
-                        </button>{{likes}}
+                        </button>{{image.likes}}
                     </div>
-                </div>
-
-                <div v-for="subscribe in subscribers" :key="subscribe" >
-                    {{subscribe}} <button v-on:click="sign">Subscribe</button>
                 </div>
           </div>
      </div>
@@ -62,7 +62,6 @@
                     avatar:"",
                     posts:[],
                     images:[],
-                    likes:"",
                     subscription:"",
                     user: {
                         email: ls.get('photohubUser')
@@ -88,25 +87,40 @@
             menu:function(){
                 this.menu_show=!this.menu_show;
             },
-            like:function() {
-                axios.post("", {
-                    likes:this.likes++
-                })
+            like:function(image) {
+                if(this.likeOn===false) {
+                    this.likeOn = true;
+                    axios.post("/api/image/like", {
+                        userEmail:this.user.email,
+                        photoId:image.id,
+                        images: image.likes--,
+                        likeOn:true,
+                    }).then(response => {
+                        if(response.status === 200) {
+                            image.likes = image.likes--;
+                        }
+                    });
+                }else {
+                    this.likeOn = false;
+                    axios.post("/api/image/like", {
+                        userEmail:this.user.email,
+                        photoId:image.id,
+                        images: image.likes++,
+                        likeOn:false,
+                    }).then(response => {
+                        if(response.status === 200) {
+                            image.likes = image.likes++;
+                        }
+                    });
+                }
             },
             mainPage:function () {
                 this.$router.push("/");
             },
             subscribe:function () {
-                axios.post("/api/subscribe", {
-                    email: this.user.email,
-                    subscription: this.image.email,
-                }).then(response => {
-                    if (response.status === 200) {
-                        ls.set("photohubUser", this.email);
-                        this.$router.push("/");
-                    } else if (response.status === 404) {
-                        this.$notify({ group: 'foo', text: 'User not found, please try again' })
-                    }
+                axios.post("/api/user/subscribe", {
+                    Subscriber: this.user.email,
+                    SubscribeTo: this.image.email,
                 })
             }
         }
@@ -118,29 +132,7 @@
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500&display=swap");
-    .header_user button{
-        outline: none;
-        border: 0;
-        background: transparent;
-    }
-    .headerMain{
-        height:100%;
-        background: #FFC800;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        padding-left: 10px;
-        padding-right: 30px;
-    }
 
-    .headerMain h1 {
-        font-family: Sedgwick Ave;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-        font-size: 35px;
-        margin-top: 10px;
-
-    }
     .contentMain{
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
