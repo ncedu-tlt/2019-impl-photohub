@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class LikesId implements Serializable {
-    private Integer userId;
+    private String userEmail;
     private Integer photoId;
 
 
@@ -12,7 +12,7 @@ public class LikesId implements Serializable {
 
 
     public LikesId(Integer userId, Integer photoId) {
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.photoId = photoId;
     }
 
@@ -21,21 +21,21 @@ public class LikesId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LikesId likesId = (LikesId) o;
-        return Objects.equals(userId, likesId.userId) &&
+        return Objects.equals(userEmail, likesId.userEmail) &&
                 Objects.equals(photoId, likesId.photoId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, photoId);
+        return Objects.hash(userEmail, photoId);
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public Integer getPhotoId() {
