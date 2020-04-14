@@ -37,7 +37,7 @@
                         <h2>
                             {{image.email}}
                         </h2>
-                        <button v-on:click="subscribe">Subscribe</button>
+                        <button v-on:click="subscribe(image)">Subscribe</button>
                     </div>
                     <div class="postContent">
                         <img :src="image.base64"/>
@@ -88,39 +88,22 @@
                 this.menu_show=!this.menu_show;
             },
             like:function(image) {
-                if(this.likeOn===false) {
-                    this.likeOn = true;
                     axios.post("/api/image/like", {
                         userEmail:this.user.email,
                         photoId:image.id,
-                        images: image.likes--,
-                        likeOn:true,
                     }).then(response => {
                         if(response.status === 200) {
-                            image.likes = image.likes--;
+                           image.likes += response.data.status ? 1 : -1;
                         }
                     });
-                }else {
-                    this.likeOn = false;
-                    axios.post("/api/image/like", {
-                        userEmail:this.user.email,
-                        photoId:image.id,
-                        images: image.likes++,
-                        likeOn:false,
-                    }).then(response => {
-                        if(response.status === 200) {
-                            image.likes = image.likes++;
-                        }
-                    });
-                }
             },
             mainPage:function () {
                 this.$router.push("/");
             },
-            subscribe:function () {
+            subscribe:function (image) {
                 axios.post("/api/user/subscribe", {
-                    Subscriber: this.user.email,
-                    SubscribeTo: this.image.email,
+                    emailSubscriber: this.user.email,
+                    subscribeTo: image.email,
                 })
             }
         }

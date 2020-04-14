@@ -150,12 +150,12 @@
     ul {
         list-style-type: none;
         padding: 0;
-        color:red;
+        color: #000000;
     }
 
     li {
         margin: 10px;
-        color:red;
+        color: #000000;
     }
     b{
         color:red;
