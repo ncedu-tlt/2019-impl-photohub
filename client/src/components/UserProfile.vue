@@ -88,6 +88,11 @@
                             <img :src="image"/>
                         </div>
                     </div>
+                    <div class="post" v-if="imagesNowBulean">
+                        <div class="postContent" v-if="imagesNowBulean">
+                            <img :src="imagesNow"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,6 +110,7 @@
                     images:[],
                     archive:[],
                     subscribers:[],
+                    imagesNow:"",
                     avatar:"",
                     likes:"",
                     user: {
@@ -115,6 +121,7 @@
                     archive_show:false,
                     likeOn:false,
                     sub_show:false,
+                    imagesNowBulean:false,
                 }
             },
             created: function (){
@@ -162,6 +169,8 @@
                         base64: reader.result
                     }).then(response => {
                         if (response.status === 200) {
+                            this.imagesNowBulean=true;
+                            this.imagesNow=reader.result;
                             this.$router.push('/');
                         }
                     })
