@@ -24,8 +24,17 @@
                     </div>
                     <div class="menu_show" v-if="menu_show">
                         <button v-on:click="mainPage">Main</button>
-                        <button v-on:change="handleFileUpload($event)">Upload</button>
-                        <button v-on:change="uploadAvatar($event)">Avatar</button>
+                        <button>
+                            <div class="upload_photo">
+                                Upload
+                                <input type="file" v-on:change="handleFileUpload($event)">
+                            </div></button>
+                        <button>
+                            <div class="uploadAvatar">
+                                Avatar
+                                <input type="file" v-on:change="uploadAvatar($event)">
+                            </div>
+                        </button>
                         <button v-on:click="exitMethods">Logout</button>
                     </div>
                 </div>
