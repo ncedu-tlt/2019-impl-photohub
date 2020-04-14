@@ -31,7 +31,7 @@ public class ContentController {
                 object.put("id", photo.getId());
                 object.put("email", photo.getEmail());
                 object.put("base64", photo.getBase64());
-                object.put("likes", photo.getLikes());
+                object.put("likes", photo.getLikes()==null?0:photo.getLikes());
                 response.add(object);
             }
         return response;

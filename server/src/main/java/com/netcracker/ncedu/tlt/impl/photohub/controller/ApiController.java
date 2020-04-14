@@ -34,9 +34,11 @@ public class ApiController {
 
 
     @PostMapping(path = "/subscribe")
-    public void addSubscribe(@RequestParam ("emailSubscriber") String emailSubscriber, @RequestParam ("SubscribeTo") String subscribeTo) throws IOException{
+    @ResponseBody
+    public void addSubscribe(@RequestBody SubscribeData subscribeData) throws IOException{
+        String emailSubscriber=subscribeData.getEmailSubscriber();
+        String subscribeTo=subscribeData.getSubscribeTo();
         Subscription sub = new Subscription();
-        Map<String, String> response = new HashMap<>();
         sub.setEmailSubscriber(emailSubscriber);
         sub.setSubscribeTo(subscribeTo);
         subscribeRepository.save(sub);
@@ -47,7 +49,7 @@ public class ApiController {
     public Object getSubscribe(@RequestParam String email) throws IOException {
         List<String> subs = subscribeRepository.findByEmailSubscriber(email)
                 .stream()
-                .map(Subscription::getEmailSubscriber)
+                .map(Subscription::getSubscribeTo)
                 .collect(Collectors.toList());
         Map<String, List<String>> map = new HashMap<>();
         map.put("subscribers", subs);

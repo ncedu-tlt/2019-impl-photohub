@@ -88,35 +88,22 @@
                 this.menu_show=!this.menu_show;
             },
             like:function(image) {
-                if(this.likeOn===false) {
-                    this.likeOn = true;
                     axios.post("/api/image/like", {
                         userEmail:this.user.email,
                         photoId:image.id,
                     }).then(response => {
                         if(response.status === 200) {
-                            image.likes = image.likes--;
+                           image.likes += response.data.status ? 1 : -1;
                         }
                     });
-                }else {
-                    this.likeOn = false;
-                    axios.post("/api/image/like", {
-                        userEmail:this.user.email,
-                        photoId:image.id,
-                    }).then(response => {
-                        if(response.status === 200) {
-                            image.likes = image.likes++;
-                        }
-                    });
-                }
             },
             mainPage:function () {
                 this.$router.push("/");
             },
             subscribe:function (image) {
                 axios.post("/api/user/subscribe", {
-                    EmailSubscriber: this.user.email,
-                    SubscribeTo: image.email,
+                    emailSubscriber: this.user.email,
+                    subscribeTo: image.email,
                 })
             }
         }

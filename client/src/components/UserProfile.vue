@@ -59,15 +59,10 @@
                 </p>
                 <div class="separator_top"></div>
                 Subscribers<br>
-                <div class="sub_ico" v-if="sub_show">
-                    <div class="postMain" v-for="subscribe in subscribers" :key="subscribe">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="16" cy="8.66667" rx="6" ry="6.66667" fill="#FFC800"/>
-                        <path d="M28 25.3333C28 29.3834 21.891 28 16 28C10.109 28 4 29.3834 4 25.3333C4 21.2832 10.109 18 16 18C21.891 18 28 21.2832 28 25.3333Z"
-                              fill="#FFC800"/>
-                    </svg>
-                        {{subscribe}}
-                    </div>
+                <div v-if="sub_show">
+                    <ul v-for="subscribe in subscribers" :key="subscribe">
+                            <li>{{subscribe}}</li>
+                    </ul>
                 </div>
                 <div class="sub_name" v-else>
                     No followers
@@ -136,9 +131,9 @@
                 });
             axios.get("/api/user/get/subscribe?email="+this.user.email)
                 .then(response=>{
-                    if(response.subscribers){
+                    if(response.data.subscribers.length){
                         this.sub_show=true;
-                        this.name=response.subscribers;
+                        this.subscribers=response.data.subscribers;
                     }
                 });
             },
