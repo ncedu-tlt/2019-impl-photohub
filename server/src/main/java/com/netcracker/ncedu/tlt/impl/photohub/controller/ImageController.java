@@ -2,6 +2,7 @@ package com.netcracker.ncedu.tlt.impl.photohub.controller;
 import com.netcracker.ncedu.tlt.impl.photohub.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -72,12 +73,14 @@ public class ImageController {
         Map<String,String> responseBody = new HashMap<>();
         responseBody.put("avatar", avatar);
         return responseBody;
-
     }
-
+    @Transactional
+    @ResponseBody
     @PostMapping(path = "/like")
-    public Object addLike(@RequestParam("userEmail") String userEmail,
-                          @RequestParam("photoId") Integer photoId)  {
+    public Object addLike(@RequestBody LikeData likeData) throws IOException {
+        String userEmail = likeData.getUserEmail();
+        Integer photoId = likeData.getPhotoId();
+        Map<String, Object> response = new HashMap<>();
         if (!likeRepository.existsByUserEmailAndPhotoId(userEmail,photoId)) {
             Likes likes = new Likes();
             likes.setUserEmail(userEmail);
@@ -86,14 +89,15 @@ public class ImageController {
             Photo likedPhoto = photoRepository.findById(photoId).get();
             likedPhoto.setLikes(likeRepository.countByPhotoId(photoId));
             photoRepository.save(likedPhoto);
-            return true;
+            response.put("status", true);
         }
         else
         { likeRepository.deleteByUserEmailAndPhotoId(userEmail, photoId);
         Photo likedPhoto = photoRepository.findById(photoId).get();
         likedPhoto.setLikes(likeRepository.countByPhotoId(photoId));
         photoRepository.save(likedPhoto);
-            return false;
+            response.put("status", false);
         }
+    return response;
     }
 }

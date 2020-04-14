@@ -32,11 +32,13 @@ public class ApiController {
         else userRepository.save(user);
     }
 
+
     @PostMapping(path = "/subscribe")
-    public void addSubscribe(@RequestParam Subscription subscribe) throws IOException{
+    public void addSubscribe(@RequestParam ("emailSubscriber") String emailSubscriber, @RequestParam ("SubscribeTo") String subscribeTo) throws IOException{
         Subscription sub = new Subscription();
-        sub.setEmailSubscriber(subscribe.getEmailSubscriber());
-        sub.setSubscribeTo(subscribe.getSubscribeTo());
+        Map<String, String> response = new HashMap<>();
+        sub.setEmailSubscriber(emailSubscriber);
+        sub.setSubscribeTo(subscribeTo);
         subscribeRepository.save(sub);
     }
 
