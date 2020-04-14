@@ -73,7 +73,6 @@ public class ImageController {
         Map<String,String> responseBody = new HashMap<>();
         responseBody.put("avatar", avatar);
         return responseBody;
-
     }
     @Transactional
     @ResponseBody
