@@ -1,12 +1,12 @@
 package com.netcracker.ncedu.tlt.impl.photohub.model;
 
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class SubscribeId implements Serializable {
 
     private String emailSubscriber;
-
     private String subscribeTo;
 
     public SubscribeId() {}

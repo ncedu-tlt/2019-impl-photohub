@@ -11,7 +11,7 @@ public class LikesId implements Serializable {
     public LikesId() {}
 
 
-    public LikesId(Integer userId, Integer photoId) {
+    public LikesId(String userEmail, Integer photoId) {
         this.userEmail = userEmail;
         this.photoId = photoId;
     }

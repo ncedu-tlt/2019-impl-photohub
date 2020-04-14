@@ -6,9 +6,9 @@ import javax.persistence.*;
 @IdClass(SubscribeId.class)
 public class Subscription {
 
-
+    @Id
     private String emailSubscriber;
-
+    @Id
     private String subscribeTo;
 
     public String getEmailSubscriber() {

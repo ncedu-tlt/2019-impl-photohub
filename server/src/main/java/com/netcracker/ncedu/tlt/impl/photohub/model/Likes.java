@@ -8,7 +8,7 @@ import javax.persistence.IdClass;
 @IdClass(LikesId.class)
 public class Likes {
 
-
+    @Id
     private String userEmail;
     @Id
     private Integer photoId;
