@@ -88,8 +88,8 @@
                             <img :src="image"/>
                         </div>
                     </div>
-                    <div class="post" v-if="imagesNowBulean">
-                        <div class="postContent" v-if="imagesNowBulean">
+                    <div class="post" v-if="isImageNow">
+                        <div class="postContent" v-if="isImageNow">
                             <img :src="imagesNow"/>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     archive_show:false,
                     likeOn:false,
                     sub_show:false,
-                    imagesNowBulean:false,
+                    isImageNow:false,
                 }
             },
             created: function (){
@@ -169,7 +169,7 @@
                         base64: reader.result
                     }).then(response => {
                         if (response.status === 200) {
-                            this.imagesNowBulean=true;
+                            this.isImageNow=true;
                             this.imagesNow=reader.result;
                             this.$router.push('/');
                         }
