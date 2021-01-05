@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-carousel": "^1.0.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "hooper": "^0.3.4",
     "local-storage": "^2.0.0",
